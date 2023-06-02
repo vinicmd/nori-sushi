@@ -1,11 +1,45 @@
 import {Router} from 'express'
+import {listCategories} from './app/useCases/categories/listCategories'
+import {createCategories} from './app/useCases/categories/createCategories'
+import {listProducts} from './app/useCases/products/listProducts'
 
 export const router = Router()
 
-router.get('/products', (req, res) => {
+// list categories
+router.get('/categories', listCategories)
+
+// create categories
+router.post('/categories', createCategories)
+
+// list products
+router.get('/products', listProducts)
+
+// create products
+router.post('/products', (req, res) => {
   res.send('Ok')
 })
 
-router.post('/products', (req, res) => {
+// get products by category
+router.get('/categories/:categoryId/products', (req, res) => {
+  res.send('Ok')
+})
+
+// create orders
+router.post('/orders', (req, res) => {
+  res.send('Ok')
+})
+
+// list orders
+router.get('/orders', (req, res) => {
+  res.send('Ok')
+})
+
+// change order status
+router.patch('/orders/:orderId', (req, res) => {
+  res.send('Ok')
+})
+
+// delete order
+router.delete('/orders/:orderId', (req, res) => {
   res.send('Ok')
 })
