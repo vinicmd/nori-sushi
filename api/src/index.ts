@@ -1,10 +1,12 @@
 import express from 'express'
 import mongoose from 'mongoose'
+import 'dotenv/config'
 
 import {router} from './routes'
+import {mongoUrl} from './utils/mongoUrl'
 
 mongoose
-  .connect('mongodb://localhost:27017')
+  .connect(mongoUrl())
   .then(() => {
     const app = express()
     const port = process.env.PORT || 3001
