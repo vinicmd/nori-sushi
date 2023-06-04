@@ -17,11 +17,11 @@ export const Order = model(
       default: Date.now,
     },
     products: {
+      required: false,
       type: [
         {
-          name: {
+          product: {
             type: Schema.Types.ObjectId,
-            required: true,
             ref: 'Product',
           },
           quantity: {

@@ -11,8 +11,8 @@ export const Product = model(
       type: Number,
       required: true,
     },
-    imagePath: {
-      type: String,
+    category: {
+      type: Schema.Types.ObjectId,
       required: true,
     },
   }),
