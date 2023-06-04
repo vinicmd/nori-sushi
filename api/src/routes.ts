@@ -1,11 +1,5 @@
 import {Router} from 'express'
-import {listCategories} from './app/useCases/categories/listCategories'
-import {createCategories} from './app/useCases/categories/createCategories'
-import {listProductsByCategory} from './app/useCases/categories/listProductsByCategory'
-import {listProducts} from './app/useCases/products/listProducts'
-import {createProduct} from './app/useCases/products/createProducts'
-import {deleteProduct} from './app/useCases/products/deleteProduct'
-import {editProduct} from './app/useCases/products/editProduct'
+
 import {
   changeStatusOrder,
   createOrder,
@@ -13,6 +7,17 @@ import {
   listAllOrders,
   listOrders,
 } from './app/useCases/orders'
+import {
+  createProduct,
+  deleteProduct,
+  editProduct,
+  listProducts,
+} from './app/useCases/products'
+import {
+  createCategories,
+  listCategories,
+  listProductsByCategory,
+} from './app/useCases/categories'
 
 export const router = Router()
 
