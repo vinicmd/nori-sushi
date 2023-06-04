@@ -1,12 +1,23 @@
 {
   "name": "norisushi-backend",
+  "description": "Infrastructure made for Nori Sushi.",
   "version": "1.0.0",
   "private": true,
   "main": "index.js",
   "license": "MIT",
+  "author": "Vinicius Duarte",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vinicmd/nori-sushi.git"
+  },
+  "bugs": {
+    "url": "https://github.com/vinicmd/nori-sushi/issues"
+  },
+  "homepage": "https://github.com/vinicmd/nori-sushi#readme",
   "scripts": {
-    "build": "tsc",
-    "dev": "nodemon src/index.ts"
+    "build": "yarn && yarn tsc",
+    "dev": "nodemon src/index.ts",
+    "start": "yarn tsc && node dist/index.js"
   },
   "dependencies": {
     "dotenv": "16.1.3",

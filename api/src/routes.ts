@@ -3,6 +3,7 @@ import {listCategories} from './app/useCases/categories/listCategories'
 import {createCategories} from './app/useCases/categories/createCategories'
 import {listProducts} from './app/useCases/products/listProducts'
 import {listProductsByCategory} from './app/useCases/categories/listProductsByCategory'
+import {listOrders} from './app/useCases/orders/listOrders'
 
 export const router = Router()
 
@@ -29,9 +30,7 @@ router.post('/orders', (req, res) => {
 })
 
 // list orders
-router.get('/orders', (req, res) => {
-  res.send('Ok')
-})
+router.get('/orders', listOrders)
 
 // change order status
 router.patch('/orders/:orderId', (req, res) => {
