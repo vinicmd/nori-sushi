@@ -9,7 +9,7 @@ export const Order = model(
     },
     status: {
       type: String,
-      enum: ['OPEN', 'CLOSED'],
+      enum: ['OPEN', 'CLOSED', 'DELETED'],
       default: 'OPEN',
     },
     createdAt: {
