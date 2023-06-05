@@ -1,13 +1,11 @@
 import {Request, Response} from 'express'
 import {Order} from '../../models/Order'
 
-export async function changeStatusOrder(req: Request, res: Response) {
+export async function deleteOrder(req: Request, res: Response) {
   try {
     const {orderId} = req.params
-    const {status} = req.body
-    console.log(status)
 
-    await Order.findByIdAndUpdate(orderId, {status})
+    await Order.findByIdAndUpdate(orderId, {status: 'DELETED'})
 
     res.sendStatus(204)
   } catch (error) {

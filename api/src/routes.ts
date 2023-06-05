@@ -3,6 +3,7 @@ import {Router} from 'express'
 import {
   changeStatusOrder,
   createOrder,
+  deleteOrder,
   editOrder,
   listAllOrders,
   listOrders,
@@ -58,6 +59,4 @@ router.patch('/orders/:orderId', changeStatusOrder)
 router.put('/orders/:orderId', editOrder)
 
 // delete order
-router.delete('/orders/:orderId', (req, res) => {
-  res.send('Ok')
-})
+router.delete('/orders/:orderId', deleteOrder)
