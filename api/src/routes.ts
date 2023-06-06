@@ -1,62 +1,49 @@
 import {Router} from 'express'
 
-import {
-  changeStatusOrder,
-  createOrder,
-  deleteOrder,
-  editOrder,
-  listAllOrders,
-  listOrders,
-} from './app/useCases/orders'
-import {
-  createProduct,
-  deleteProduct,
-  editProduct,
-  listProducts,
-} from './app/useCases/products'
-import {
-  createCategories,
-  listCategories,
-  listProductsByCategory,
-} from './app/useCases/categories'
+import {Orders} from './app/useCases/orders'
+import {Products} from './app/useCases/products'
+import {Categories} from './app/useCases/categories'
 
 export const router = Router()
 
 // list categories
-router.get('/categories', listCategories)
+router.get('/categories', Categories.listCategories)
 
 // create categories
-router.post('/categories', createCategories)
+router.post('/categories', Categories.createCategories)
 
 // list products
-router.get('/products', listProducts)
+router.get('/products', Products.listProducts)
 
 // create products
-router.post('/products', createProduct)
+router.post('/products', Products.createProduct)
 
 // edit products
-router.put('/products/:productId', editProduct)
+router.put('/products/:productId', Products.editProduct)
 
 // delete products
-router.delete('/products/:productId', deleteProduct)
+router.delete('/products/:productId', Products.deleteProduct)
 
 // get products by category
-router.get('/categories/:categoryId/products', listProductsByCategory)
+router.get(
+  '/categories/:categoryId/products',
+  Categories.listProductsByCategory,
+)
 
 // create orders
-router.post('/orders', createOrder)
+router.post('/orders', Orders.createOrder)
 
 // list orders
-router.get('/orders', listOrders)
+router.get('/orders', Orders.listOrders)
 
 // list all orders
-router.get('/orders/all', listAllOrders)
+router.get('/orders/all', Orders.listAllOrders)
 
 // change order status
-router.patch('/orders/:orderId', changeStatusOrder)
+router.patch('/orders/:orderId', Orders.changeStatusOrder)
 
 // edit order
-router.put('/orders/:orderId', editOrder)
+router.put('/orders/:orderId', Orders.editOrder)
 
 // delete order
-router.delete('/orders/:orderId', deleteOrder)
+router.delete('/orders/:orderId', Orders.deleteOrder)

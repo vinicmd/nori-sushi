@@ -1,6 +1,15 @@
-export {createOrder} from './createOrder'
-export {editOrder} from './editOrder'
-export {listAllOrders} from './listAllOrders'
-export {listOrders} from './listOrders'
-export {changeStatusOrder} from './changeStatusOrder'
-export {deleteOrder} from './deleteOrder'
+import {createOrder} from './createOrder'
+import {editOrder} from './editOrder'
+import {listAllOrders} from './listAllOrders'
+import {listOrders} from './listOrders'
+import {changeStatusOrder} from './changeStatusOrder'
+import {deleteOrder} from './deleteOrder'
+
+export const Orders = {
+  createOrder,
+  editOrder,
+  listAllOrders,
+  listOrders,
+  changeStatusOrder,
+  deleteOrder,
+}
