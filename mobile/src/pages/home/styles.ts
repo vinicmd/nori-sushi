@@ -1,6 +1,7 @@
 import styled from 'styled-components/native'
-import {Image} from 'react-native'
+import {FlatList, Image} from 'react-native'
 import {colors} from '../../utils/colors'
+import {Order} from '../../utils/types'
 
 export const HomeContainer = styled.View`
   background: ${colors.background};
@@ -23,7 +24,7 @@ export const List = styled.ScrollView`
   margin-top: 15px;
 `
 
-export const OrdersList = styled.FlatList``
+export const OrdersList = styled(FlatList<Order>)``
 
 export const Separator = styled.View`
   width: 100%;
