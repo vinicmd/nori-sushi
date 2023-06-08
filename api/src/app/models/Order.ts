@@ -26,7 +26,6 @@ export const Order = model(
           },
           quantity: {
             type: Number,
-            required: true,
             default: 1,
           },
         },

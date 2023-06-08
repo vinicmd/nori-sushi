@@ -5,7 +5,6 @@ import {TouchableOpacity} from 'react-native'
 
 export const Card = styled(TouchableOpacity)`
   height: ${useResponsive(120)};
-  border: 1px solid ${colors.white};
   padding: 12px;
 `
 
@@ -18,7 +17,7 @@ export const Footer = styled.View`
   justify-content: space-between;
 `
 
-export const TableNumber = styled.Text`
+export const Table = styled.Text`
   font-size: ${useResponsive(32)};
   color: ${colors.white};
 `

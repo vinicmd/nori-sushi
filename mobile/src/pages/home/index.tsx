@@ -4,7 +4,7 @@ import {useGetMethod} from '../../utils/useGetMethod'
 import * as S from './styles'
 
 const Home = () => {
-  const orders: Array<Order> = useGetMethod('/orders/all')
+  const orders: Array<Order> = useGetMethod('/orders')
 
   return (
     <S.HomeContainer>
@@ -13,14 +13,12 @@ const Home = () => {
       </S.Header>
       <S.OrdersList
         data={orders}
-        contentContainerStyle={{marginTop: 10}}
         keyExtractor={(_, idx) => `item_${idx.toString()}`}
         renderItem={({item}: OrderProp) => {
           return <OrderCard order={item} onPress={() => console.log(item)} />
         }}
         ItemSeparatorComponent={() => <S.Separator />}
       />
-      <S.List></S.List>
     </S.HomeContainer>
   )
 }

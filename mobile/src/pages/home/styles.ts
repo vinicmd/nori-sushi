@@ -19,12 +19,11 @@ export const Logo = styled(Image)`
   width: 80px;
 `
 
-export const List = styled.ScrollView`
-  flex: 1;
-  margin-top: 15px;
-`
+export const List = styled.ScrollView``
 
-export const OrdersList = styled(FlatList<Order>)``
+export const OrdersList = styled(FlatList<Order>)`
+  flex: 1;
+`
 
 export const Separator = styled.View`
   width: 100%;
