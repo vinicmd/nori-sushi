@@ -1,10 +1,12 @@
+import {useNavigation} from '@react-navigation/native'
 import {OrderCard} from '../../components/OrderCard'
-import {Order, OrderProp} from '../../utils/types'
+import {NavigationType, Order, OrderProp} from '../../utils/types'
 import {useGetMethod} from '../../utils/useGetMethod'
 import * as S from './styles'
 
 const Home = () => {
   const orders: Array<Order> = useGetMethod('/orders')
+  const navigation = useNavigation<NavigationType>()
 
   return (
     <S.HomeContainer>
@@ -15,9 +17,17 @@ const Home = () => {
         data={orders}
         keyExtractor={(_, idx) => `item_${idx.toString()}`}
         renderItem={({item}: OrderProp) => {
-          return <OrderCard order={item} onPress={() => console.log(item)} />
+          return (
+            <OrderCard
+              order={item}
+              onPress={() =>
+                navigation.navigate('Details', {
+                  id: item._id,
+                })
+              }
+            />
+          )
         }}
-        ItemSeparatorComponent={() => <S.Separator />}
       />
     </S.HomeContainer>
   )

@@ -3,7 +3,7 @@ import {FlatList, Image} from 'react-native'
 import {colors} from '../../utils/colors'
 import {Order} from '../../utils/types'
 
-export const HomeContainer = styled.View`
+export const HomeContainer = styled.SafeAreaView`
   background: ${colors.background};
   flex: 1;
 `

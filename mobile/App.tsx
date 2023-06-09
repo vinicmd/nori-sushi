@@ -5,16 +5,28 @@
  * @format
  */
 
-import React from 'react'
-import {SafeAreaView, StatusBar} from 'react-native'
-import {Home} from './src/pages/home'
+import {StatusBar} from 'react-native'
+import {NavigationContainer} from '@react-navigation/native'
+import {createNativeStackNavigator} from '@react-navigation/native-stack'
 
-function App() {
+import {Home} from './src/pages/home'
+import {Details} from './src/pages/details'
+
+const App = () => {
+  const Stack = createNativeStackNavigator()
+
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <NavigationContainer>
       <StatusBar barStyle={'dark-content'} />
-      <Home />
-    </SafeAreaView>
+      <Stack.Navigator
+        initialRouteName="Home"
+        screenOptions={{
+          headerShown: false,
+        }}>
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Details" component={Details} />
+      </Stack.Navigator>
+    </NavigationContainer>
   )
 }
 

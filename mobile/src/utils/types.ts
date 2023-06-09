@@ -28,3 +28,22 @@ export type Products = {
   quantity: number
   _id: string
 }
+
+export type NavigationType = {
+  navigate: (route: string, params?: NonNullable<unknown>) => void
+  goBack: () => void
+  dispatch: (navigation: void) => void
+}
+
+type Route = {
+  key?: string
+  name?: string
+  params?: {
+    id?: string | number
+  }
+  path?: string
+}
+
+export interface RouteProp {
+  route: Route
+}

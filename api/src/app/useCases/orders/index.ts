@@ -4,6 +4,7 @@ import {listAllOrders} from './listAllOrders'
 import {listOrders} from './listOrders'
 import {changeStatusOrder} from './changeStatusOrder'
 import {deleteOrder} from './deleteOrder'
+import {listOneOrder} from './listOneOrder'
 
 export const Orders = {
   createOrder,
@@ -12,4 +13,5 @@ export const Orders = {
   listOrders,
   changeStatusOrder,
   deleteOrder,
+  listOneOrder,
 }

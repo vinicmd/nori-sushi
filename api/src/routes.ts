@@ -36,6 +36,9 @@ router.post('/orders', Orders.createOrder)
 // list orders
 router.get('/orders', Orders.listOrders)
 
+// list orders
+router.get('/orders/:orderId', Orders.listOneOrder)
+
 // list all orders
 router.get('/orders/all', Orders.listAllOrders)
 
