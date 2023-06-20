@@ -1,5 +1,5 @@
-import {getDescription} from '../utils/getDescription'
-import {Order} from '../utils/types'
+import {getDescription} from '../../utils/getDescription'
+import {Order} from '../../utils/types'
 import * as S from './styles'
 
 type Types = {

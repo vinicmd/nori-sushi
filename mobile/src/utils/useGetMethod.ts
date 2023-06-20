@@ -5,7 +5,7 @@ export function useGetMethod<T>(route: string): T {
   const [data, setData] = useState(Object)
 
   useEffect(() => {
-    const fetchData = async () => {
+    async function fetchData() {
       try {
         const {data: response} = await api.get(route)
         setData(response)

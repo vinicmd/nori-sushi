@@ -1,7 +1,7 @@
 import styled from 'styled-components/native'
-import {useResponsive} from '../utils/responsive'
-import {colors} from '../utils/colors'
 import {TouchableOpacity} from 'react-native'
+import {useResponsive} from '../../utils/responsive'
+import {colors} from '../../utils/colors'
 
 export const Card = styled(TouchableOpacity)`
   height: ${useResponsive(120)};
