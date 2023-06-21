@@ -1,7 +1,8 @@
 import styled from 'styled-components/native'
+import {TouchableOpacity} from 'react-native'
+import AntDesign from 'react-native-vector-icons/AntDesign'
 import {colors} from '../../utils/colors'
 import {useResponsive} from '../../utils/responsive'
-import {TouchableOpacity} from 'react-native'
 
 export const DetailsContainer = styled.SafeAreaView`
   flex: 1;
@@ -21,9 +22,10 @@ export const TableName = styled.Text`
   color: ${colors.white};
 `
 
-export const CloseOrderContainer = styled.TouchableOpacity`
+export const CloseOrderContainer = styled(TouchableOpacity)`
   padding: 10px;
-  border-radius: 10px;
+  width: 90px;
+  border-radius: 20px;
   background: ${colors.red};
   align-items: center;
   justify-content: center;
@@ -78,13 +80,89 @@ export const ProductUnityPrice = styled.Text`
 export const Footer = styled.View`
   height: 120px;
   width: 100%;
+  justify-content: space-between;
+  align-items: center;
 `
 
-export const SubtotalContainer = styled.View``
+export const SubtotalContainer = styled.View`
+  padding: 0 12px;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 24px;
+`
 
 export const Subtotal = styled.Text`
   font-size: 24px;
   color: ${colors.white};
 `
 
-export const SubtotalPrice = styled.Text``
+export const SubtotalPrice = styled.Text`
+  color: ${colors.green};
+  font-size: 32px;
+`
+
+export const AddButton = styled(TouchableOpacity)`
+  width: 90%;
+  padding: 10px;
+  border-radius: 20px;
+  background: ${colors.red};
+  align-items: center;
+  justify-content: center;
+`
+
+export const AddText = styled.Text`
+  font-size: 26px;
+`
+export const Button = styled.TouchableOpacity``
+
+export const Icon = styled(AntDesign)`
+  color: #d72e2e;
+`
+
+export const Overlay = styled(TouchableOpacity)`
+  width: 100%;
+  height: 100%;
+
+  background-color: rgba(0, 0, 0, 0.6);
+  align-items: center;
+  justify-content: center;
+`
+
+export const ModalBody = styled(TouchableOpacity)`
+  border-radius: 20px;
+  width: 90%;
+  height: ${useResponsive(40, true)};
+
+  padding: 20px;
+
+  background-color: #191919;
+`
+
+export const ModalHeader = styled.View`
+  align-items: center;
+`
+
+export const ModalOptions = styled.View`
+  height: 80%;
+
+  justify-content: center;
+  align-items: center;
+`
+
+export const ModalText = styled.Text`
+  font-size: ${useResponsive(24)};
+  color: #f2f2f2;
+  text-align: center;
+`
+
+export const ModalCloseButton = styled(Button)`
+  position: absolute;
+  right: 10px;
+`
+
+export const ModalClientName = styled.Text`
+  font-size: ${useResponsive(24)};
+  margin-bottom: 16px;
+`
