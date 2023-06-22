@@ -117,7 +117,7 @@ export const AddText = styled.Text`
 `
 export const Button = styled.TouchableOpacity``
 
-export const Icon = styled(AntDesign)`
+export const ModalIcon = styled(AntDesign)`
   color: #d72e2e;
 `
 
@@ -151,7 +151,7 @@ export const ModalOptions = styled.View`
   align-items: center;
 `
 
-export const ModalText = styled.Text`
+export const ModalProductName = styled.Text`
   font-size: ${useResponsive(24)};
   color: #f2f2f2;
   text-align: center;
@@ -162,7 +162,21 @@ export const ModalCloseButton = styled(Button)`
   right: 10px;
 `
 
-export const ModalClientName = styled.Text`
+export const ModalContent = styled.View`
+  flex: 1;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-around;
+`
+
+export const Quantity = styled.Text`
+  font-size: ${useResponsive(60)};
+`
+
+export const ModalButton = styled.TouchableOpacity``
+
+/* export const ModalProductName = styled.Text`
   font-size: ${useResponsive(24)};
   margin-bottom: 16px;
 `
+ */

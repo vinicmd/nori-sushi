@@ -5,28 +5,89 @@ import {useGetMethod} from '../../utils/useGetMethod'
 import * as S from './styles'
 import {useState} from 'react'
 import {RFValue} from 'react-native-responsive-fontsize'
+import Button from '../../components/Button'
+
+type SelectedProduct = {
+  selectedProduct: Products
+  isVisible: boolean
+}
 
 export const Details = ({route}: RouteProp) => {
-  const [modalVisible, setModalVisible] = useState(false)
-  const [clickedProduct, setClickedProduct] = useState<Products>()
+  const [productState, setProductState] = useState<SelectedProduct>({
+    selectedProduct: {
+      product: {
+        _id: '',
+        name: '',
+        price: 0,
+        category: '',
+        __v: 0,
+      },
+      quantity: 0,
+      _id: '',
+    },
+    isVisible: false,
+  })
+  const [quantity, setQuantity] = useState(0)
+
   const formatter = new Intl.NumberFormat('pt-BR', {
     style: 'currency',
     currency: 'EUR',
   })
 
-  function changeModalVisibility(product?: Products) {
-    product && setClickedProduct(product)
-    return setModalVisible(!modalVisible)
-  }
-
-  function handleClick(product: Products) {
-    changeModalVisibility(product)
-    console.log(clickedProduct)
-  }
-
   const listOrder = useGetMethod<Array<Order>>(`/orders/${route.params?.id}`)
   const order = listOrder[0]
-  console.log(order)
+
+  function handlePress(selectedProduct: Products) {
+    setProductState({
+      selectedProduct,
+      isVisible: true,
+    })
+    setQuantity(selectedProduct.quantity)
+  }
+
+  function closeModal() {
+    setProductState({
+      selectedProduct: {
+        product: {
+          _id: '',
+          name: '',
+          price: 0,
+          category: '',
+          __v: 0,
+        },
+        quantity: 0,
+        _id: '',
+      },
+      isVisible: false,
+    })
+  }
+
+  const increaseValue = () => {
+    setQuantity(quantity + 1)
+  }
+
+  const decreaseValue = () => {
+    if (quantity === 0) return
+    setQuantity(quantity - 1)
+  }
+
+  /* function handleQuantity() {
+    const products = order.products
+    const newProducts = []
+    products.forEach((product) => {
+
+    console.log(products)
+    /* actualQuantity !== quantity &&
+      setProductState({
+        selectedProduct: {
+          product: productState.selectedProduct.product,
+          quantity: 0,
+          _id: productState.selectedProduct._id,
+        },
+        isVisible: false,
+      })
+    } */
+
   return (
     <S.DetailsContainer>
       <S.DetailHeader>
@@ -45,23 +106,19 @@ export const Details = ({route}: RouteProp) => {
               product.product.price * product.quantity,
             )
             return (
-              <>
-                <S.Product
-                  key={product._id}
-                  onPress={() => handleClick(product)}>
-                  <S.ProductDescription>
-                    <S.ProductName>{product.product.name}</S.ProductName>
-                    <S.ProductQuantity>{`x ${product.quantity}`}</S.ProductQuantity>
-                  </S.ProductDescription>
-                  <S.ProductPrice>
-                    <S.ProductUnityPrice>
-                      {product.quantity > 1 &&
-                        `Unidade: ${formatter.format(product.product.price)}`}
-                    </S.ProductUnityPrice>
-                    <S.ProductActualPrice>{`${actualPrice}`}</S.ProductActualPrice>
-                  </S.ProductPrice>
-                </S.Product>
-              </>
+              <S.Product key={product._id} onPress={() => handlePress(product)}>
+                <S.ProductDescription>
+                  <S.ProductName>{product.product.name}</S.ProductName>
+                  <S.ProductQuantity>{`x ${product.quantity}`}</S.ProductQuantity>
+                </S.ProductDescription>
+                <S.ProductPrice>
+                  <S.ProductUnityPrice>
+                    {product.quantity > 1 &&
+                      `Unidade: ${formatter.format(product.product.price)}`}
+                  </S.ProductUnityPrice>
+                  <S.ProductActualPrice>{`${actualPrice}`}</S.ProductActualPrice>
+                </S.ProductPrice>
+              </S.Product>
             )
           })}
       </S.ProductsContainer>
@@ -77,29 +134,32 @@ export const Details = ({route}: RouteProp) => {
       <Modal
         animationType="fade"
         transparent
-        visible={modalVisible}
+        visible={productState.isVisible}
         onRequestClose={() => {
-          changeModalVisibility()
+          closeModal()
         }}>
-        <S.Overlay activeOpacity={1} onPressIn={() => changeModalVisibility()}>
+        <S.Overlay activeOpacity={1} onPressIn={() => closeModal()}>
           <S.ModalBody activeOpacity={1} onPress={() => null}>
             <S.ModalHeader>
-              <S.ModalText>{clickedProduct?.product.name}</S.ModalText>
-              <S.ModalCloseButton onPress={() => changeModalVisibility()}>
-                <S.Icon name="closecircleo" size={RFValue(26)} />
+              <S.ModalProductName>
+                {productState.selectedProduct.product.name}
+              </S.ModalProductName>
+              <S.ModalCloseButton onPress={() => closeModal()}>
+                <S.ModalIcon name="closecircleo" size={RFValue(26)} />
               </S.ModalCloseButton>
             </S.ModalHeader>
-            <S.ModalOptions>
-              <S.ModalClientName>{'fulano'}</S.ModalClientName>
-              {/* <Button
-                style={{marginBottom: 16}}
-                onPress={() => console.log('Criar')}>
-                Criar Pedido
-              </Button>
-              <Button onPress={() => console.log('Teste')}>
-                Editar Cadastro
-              </Button> */}
-            </S.ModalOptions>
+            <S.ModalContent>
+              <S.ModalButton onPress={() => decreaseValue()}>
+                <S.ModalIcon name="minuscircleo" size={RFValue(45)} />
+              </S.ModalButton>
+              <S.Quantity>{quantity}</S.Quantity>
+              <S.ModalButton onPress={() => increaseValue()}>
+                <S.ModalIcon name="pluscircleo" size={RFValue(45)} />
+              </S.ModalButton>
+            </S.ModalContent>
+            <Button onPress={() => console.log('/* handleQuantity() */')}>
+              {quantity ? 'Adicionar' : 'Excluir'}
+            </Button>
           </S.ModalBody>
         </S.Overlay>
       </Modal>
