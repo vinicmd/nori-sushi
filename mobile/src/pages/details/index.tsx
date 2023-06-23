@@ -1,6 +1,6 @@
 import {Modal} from 'react-native'
 import {BackButton} from '../../components/backButton'
-import {Order, Products, RouteProp} from '../../utils/types'
+import {Order, Product, Products, RouteProp} from '../../utils/types'
 import {useGetMethod} from '../../utils/useGetMethod'
 import * as S from './styles'
 import {useState} from 'react'
@@ -10,6 +10,12 @@ import Button from '../../components/Button'
 type SelectedProduct = {
   selectedProduct: Products
   isVisible: boolean
+}
+
+type NewProduct = {
+  _id: string
+  product: Product
+  quantity: number
 }
 
 export const Details = ({route}: RouteProp) => {
@@ -71,22 +77,21 @@ export const Details = ({route}: RouteProp) => {
     setQuantity(quantity - 1)
   }
 
-  /* function handleQuantity() {
-    const products = order.products
-    const newProducts = []
-    products.forEach((product) => {
+  function handleQuantity() {
+    const newProducts: Array<NewProduct> = []
+    order.products.forEach(product => {
+      product._id !== productState.selectedProduct._id &&
+        newProducts.push(product)
+    })
 
-    console.log(products)
-    /* actualQuantity !== quantity &&
-      setProductState({
-        selectedProduct: {
-          product: productState.selectedProduct.product,
-          quantity: 0,
-          _id: productState.selectedProduct._id,
-        },
-        isVisible: false,
-      })
-    } */
+    newProducts.push({
+      _id: productState.selectedProduct._id,
+      product: productState.selectedProduct.product,
+      quantity,
+    })
+
+    console.log(newProducts)
+  }
 
   return (
     <S.DetailsContainer>
@@ -157,7 +162,7 @@ export const Details = ({route}: RouteProp) => {
                 <S.ModalIcon name="pluscircleo" size={RFValue(45)} />
               </S.ModalButton>
             </S.ModalContent>
-            <Button onPress={() => console.log('/* handleQuantity() */')}>
+            <Button onPress={() => console.log(handleQuantity())}>
               {quantity ? 'Adicionar' : 'Excluir'}
             </Button>
           </S.ModalBody>

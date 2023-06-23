@@ -1,0 +1,70 @@
+{
+  "categories": [
+    {
+      "name": "Entrada",
+      "icon": "🍤"
+    },
+    {
+      "name": "Exclusivos",
+      "icon": "🍣"
+    },
+    {
+      "name": "Combinados",
+      "icon": "🍱"
+    },
+    {
+      "name": "Yakisobas",
+      "icon": "🍝"
+    },
+    {
+      "name": "Tradicionais",
+      "icon": "🍙"
+    },
+    {
+      "name": "Temakis",
+      "icon": "🍚"
+    },
+    {
+      "name": "Especiais",
+      "icon": "🍥"
+    },
+    {
+      "name": "Sobremesa",
+      "icon": "🍦"
+    },
+    {
+      "name": "Bebidas",
+      "icon": "🥤"
+    }
+  ],
+  "products": [
+    {
+      "name": "Camarão Recheado",
+      "price": 7,
+      "category": "COLOCAR AQUI"
+    },
+    {
+      "name": "Coca Cola",
+      "price": 1.7,
+      "category": "COLOCAR AQUI"
+    },
+    {
+      "name": "Guaraná Antarctica",
+      "price": 1.7,
+      "category": "COLOCAR AQUI"
+    }
+  ],
+  "orders": {
+    "table": "Mesa TAL",
+    "products": [
+      {
+        "product": "647ca19672abd679db14b271",
+        "quantity": 9
+      },
+      {
+        "product": "647ca1bd72abd679db14b273",
+        "quantity": 10
+      }
+    ]
+  }
+}

@@ -40,7 +40,7 @@ router.get('/orders', Orders.listOrders)
 router.get('/orders/:orderId', Orders.listOneOrder)
 
 // list all orders
-router.get('/orders/all', Orders.listAllOrders)
+router.get('/allorders', Orders.listAllOrders)
 
 // change order status
 router.patch('/orders/:orderId', Orders.changeStatusOrder)

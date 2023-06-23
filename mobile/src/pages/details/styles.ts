@@ -94,13 +94,13 @@ export const SubtotalContainer = styled.View`
 `
 
 export const Subtotal = styled.Text`
-  font-size: 24px;
+  font-size: 32px;
   color: ${colors.white};
 `
 
 export const SubtotalPrice = styled.Text`
   color: ${colors.green};
-  font-size: 32px;
+  font-size: 36px;
 `
 
 export const AddButton = styled(TouchableOpacity)`
