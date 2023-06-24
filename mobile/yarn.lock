@@ -1949,7 +1949,7 @@
   resolved "https://registry.yarnpkg.com/@react-native/js-polyfills/-/js-polyfills-0.72.1.tgz#905343ef0c51256f128256330fccbdb35b922291"
   integrity sha512-cRPZh2rBswFnGt5X5EUEPs0r+pAsXxYsifv/fgy9ZLQokuT52bPH+9xjDR+7TafRua5CttGW83wP4TntRcWNDA==
 
-"@react-native/metro-config@^0.72.6":
+"@react-native/metro-config@0.72.6":
   version "0.72.6"
   resolved "https://registry.yarnpkg.com/@react-native/metro-config/-/metro-config-0.72.6.tgz#77efdcdc51ff0df0269031dc4442b7dbb50ef9eb"
   integrity sha512-hkV0okTi/N/ui1PF4ZgxPV9zajHkxuu+arpQwk8rY+QPZgGM8SIAN5tf68DWJTbPCfAiZLFoW1TgMNbvKrSY1A==
@@ -5807,7 +5807,7 @@ react-native-dotenv@^3.4.8:
   dependencies:
     dotenv "^16.0.3"
 
-react-native-gradle-plugin@^0.71.19:
+react-native-gradle-plugin@0.71.19:
   version "0.71.19"
   resolved "https://registry.yarnpkg.com/react-native-gradle-plugin/-/react-native-gradle-plugin-0.71.19.tgz#3379e28341fcd189bc1f4691cefc84c1a4d7d232"
   integrity sha512-1dVk9NwhoyKHCSxcrM6vY6cxmojeATsBobDicX0ZKr7DgUF2cBQRTKsimQFvzH8XhOVXyH8p4HyDSZNIFI8OlQ==

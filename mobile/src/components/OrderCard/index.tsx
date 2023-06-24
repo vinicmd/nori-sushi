@@ -1,3 +1,4 @@
+import {formatCurrency} from '../../utils/formatCurrency'
 import {getDescription} from '../../utils/getDescription'
 import {Order} from '../../utils/types'
 import * as S from './styles'
@@ -20,7 +21,7 @@ export const OrderCard = ({order, onPress}: Types) => {
             {getDescription(order)}
           </S.Description>
         </S.DescriptionContainer>
-        <S.Price>{'€ 45.00'}</S.Price>
+        <S.Price>{formatCurrency(40)}</S.Price>
       </S.Footer>
     </S.Card>
   )

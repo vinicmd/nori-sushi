@@ -1,11 +1,14 @@
-import {Modal} from 'react-native'
+import {ActivityIndicator, Modal, RefreshControl} from 'react-native'
 import {BackButton} from '../../components/backButton'
-import {Order, Product, Products, RouteProp} from '../../utils/types'
-import {useGetMethod} from '../../utils/useGetMethod'
+import {Order, Products, RouteProp} from '../../utils/types'
 import * as S from './styles'
-import {useState} from 'react'
+import {useCallback, useState} from 'react'
 import {RFValue} from 'react-native-responsive-fontsize'
 import Button from '../../components/Button'
+import {api} from '../../api'
+import {formatCurrency} from '../../utils/formatCurrency'
+import {useFocusEffect} from '@react-navigation/native'
+import {colors} from '../../utils/colors'
 
 type SelectedProduct = {
   selectedProduct: Products
@@ -13,8 +16,7 @@ type SelectedProduct = {
 }
 
 type NewProduct = {
-  _id: string
-  product: Product
+  product: string
   quantity: number
 }
 
@@ -34,14 +36,38 @@ export const Details = ({route}: RouteProp) => {
     isVisible: false,
   })
   const [quantity, setQuantity] = useState(0)
+  const [order, setOrder] = useState<Order>()
+  const [isLoading, setIsLoading] = useState(true)
+  const [orderObject, setOrderObject] = useState({})
+  const [refreshing, setRefreshing] = useState(false)
 
-  const formatter = new Intl.NumberFormat('pt-BR', {
-    style: 'currency',
-    currency: 'EUR',
-  })
+  const id = route.params?.id
 
-  const listOrder = useGetMethod<Array<Order>>(`/orders/${route.params?.id}`)
-  const order = listOrder[0]
+  useFocusEffect(
+    useCallback(() => {
+      const fetchData = async () => {
+        try {
+          console.log('mensagem lkdjslkjsa')
+          const result = await api(`/orders/${id}`)
+          setOrder(result.data[0])
+        } catch (error: unknown) {
+          console.log(error)
+        } finally {
+          setIsLoading(false)
+        }
+      }
+
+      fetchData()
+    }, [orderObject]),
+  )
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true)
+    setTimeout(() => {
+      setRefreshing(false)
+      setOrderObject({})
+    }, 1500)
+  }, [])
 
   function handlePress(selectedProduct: Products) {
     setProductState({
@@ -77,24 +103,40 @@ export const Details = ({route}: RouteProp) => {
     setQuantity(quantity - 1)
   }
 
-  function handleQuantity() {
-    const newProducts: Array<NewProduct> = []
-    order.products.forEach(product => {
-      product._id !== productState.selectedProduct._id &&
-        newProducts.push(product)
-    })
+  async function handleQuantity() {
+    try {
+      setIsLoading(true)
+      const newProducts: Array<NewProduct> = []
+      order &&
+        order.products.forEach(product => {
+          product._id !== productState.selectedProduct._id &&
+            newProducts.push({
+              product: product.product._id,
+              quantity: product.quantity,
+            })
+        })
 
-    newProducts.push({
-      _id: productState.selectedProduct._id,
-      product: productState.selectedProduct.product,
-      quantity,
-    })
+      newProducts.push({
+        product: productState.selectedProduct.product._id,
+        quantity,
+      })
+      const result = await api.put(`/orders/${id}`, {
+        products: newProducts,
+      })
 
-    console.log(newProducts)
+      setOrder(result.data[0])
+      setOrderObject({})
+    } catch (error: unknown) {
+      console.log('Error: ', error)
+    } finally {
+      setIsLoading(false)
+      closeModal()
+    }
   }
 
   return (
     <S.DetailsContainer>
+      {isLoading && <ActivityIndicator size="large" color={colors.red} />}
       <S.DetailHeader>
         <BackButton />
         <S.TableName>{`${
@@ -104,10 +146,13 @@ export const Details = ({route}: RouteProp) => {
           <S.CloseOrderText>Encerrar</S.CloseOrderText>
         </S.CloseOrderContainer>
       </S.DetailHeader>
-      <S.ProductsContainer>
+      <S.ProductsContainer
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }>
         {order &&
           order.products.map(product => {
-            const actualPrice = formatter.format(
+            const actualPrice = formatCurrency(
               product.product.price * product.quantity,
             )
             return (
@@ -119,7 +164,7 @@ export const Details = ({route}: RouteProp) => {
                 <S.ProductPrice>
                   <S.ProductUnityPrice>
                     {product.quantity > 1 &&
-                      `Unidade: ${formatter.format(product.product.price)}`}
+                      `Unidade: ${formatCurrency(product.product.price)}`}
                   </S.ProductUnityPrice>
                   <S.ProductActualPrice>{`${actualPrice}`}</S.ProductActualPrice>
                 </S.ProductPrice>
@@ -162,7 +207,7 @@ export const Details = ({route}: RouteProp) => {
                 <S.ModalIcon name="pluscircleo" size={RFValue(45)} />
               </S.ModalButton>
             </S.ModalContent>
-            <Button onPress={() => console.log(handleQuantity())}>
+            <Button onPress={() => handleQuantity()}>
               {quantity ? 'Adicionar' : 'Excluir'}
             </Button>
           </S.ModalBody>

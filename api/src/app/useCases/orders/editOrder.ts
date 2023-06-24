@@ -6,9 +6,18 @@ export async function editOrder(req: Request, res: Response) {
     const {orderId} = req.params
     const {table, products, status} = req.body
 
-    await Order.findByIdAndUpdate(orderId, {table, products, status})
+    await Order.findByIdAndUpdate(orderId, {
+      table,
+      products,
+      status,
+    })
 
-    res.sendStatus(204)
+    const order = await Order.find()
+      .populate('products.product')
+      .where('_id')
+      .equals(orderId)
+
+    res.status(204).json(order)
   } catch (error) {
     console.error(error)
     console.log(error)
