@@ -12,6 +12,9 @@ router.get('/categories', Categories.listCategories)
 // create categories
 router.post('/categories', Categories.createCategories)
 
+// edit category
+router.put('/categories/:categoryId', Categories.editCategory)
+
 // list products
 router.get('/products', Products.listProducts)
 

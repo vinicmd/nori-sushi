@@ -1,4 +1,5 @@
-import {formatCurrency} from '../../utils/formatCurrency'
+import {CalcAmount} from '../../utils/calcAmount'
+import {colors} from '../../utils/colors'
 import {getDescription} from '../../utils/getDescription'
 import {Order} from '../../utils/types'
 import * as S from './styles'
@@ -11,7 +12,7 @@ export const OrderCard = ({order, onPress}: Types) => {
   return (
     <S.Card
       onPress={onPress}
-      style={{borderBottomColor: '#f2f2f2', borderBottomWidth: 1}}>
+      style={{borderBottomColor: `${colors.white}`, borderBottomWidth: 1}}>
       <S.Title>
         <S.Table>{`${order.table}`}</S.Table>
       </S.Title>
@@ -21,7 +22,7 @@ export const OrderCard = ({order, onPress}: Types) => {
             {getDescription(order)}
           </S.Description>
         </S.DescriptionContainer>
-        <S.Price>{formatCurrency(40)}</S.Price>
+        <S.Price>{`${CalcAmount(order.products)}`}</S.Price>
       </S.Footer>
     </S.Card>
   )

@@ -29,13 +29,13 @@ export type Products = {
   _id: string
 }
 
-export type NavigationType = {
+export type NavigationType2 = {
   navigate: (route: string, params?: NonNullable<unknown>) => void
   goBack: () => void
   dispatch: (navigation: void) => void
 }
 
-type Route = {
+export type Route = {
   key?: string
   name?: string
   params?: {
@@ -46,4 +46,13 @@ type Route = {
 
 export interface RouteProp {
   route: Route
+}
+
+export type NavigationType<T> = {
+  navigate: (screen: string, params: T | undefined) => void
+}
+
+export interface UseNavigationProps<N, R> {
+  navigation: NavigationType<N>
+  route: R
 }

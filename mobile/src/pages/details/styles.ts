@@ -88,9 +88,9 @@ export const SubtotalContainer = styled.View`
   padding: 0 12px;
   width: 100%;
   flex-direction: row;
-  align-items: center;
+  align-items: start;
   justify-content: space-between;
-  margin-top: 24px;
+  margin-top: 12px;
 `
 
 export const Subtotal = styled.Text`
@@ -107,7 +107,6 @@ export const AddButton = styled(TouchableOpacity)`
   width: 90%;
   padding: 10px;
   border-radius: 20px;
-  background: ${colors.red};
   align-items: center;
   justify-content: center;
 `
@@ -175,8 +174,25 @@ export const Quantity = styled.Text`
 
 export const ModalButton = styled.TouchableOpacity``
 
-/* export const ModalProductName = styled.Text`
-  font-size: ${useResponsive(24)};
-  margin-bottom: 16px;
+export const ModalCloseBody = styled(TouchableOpacity)`
+  border-radius: 20px;
+  width: 90%;
+  height: ${useResponsive(40, true)};
+
+  padding: 20px;
+
+  background-color: #191919;
 `
- */
+
+export const ModalCloseMessage = styled.Text`
+  font-size: ${useResponsive(24)};
+  color: ${colors.white};
+  text-align: center;
+`
+
+export const ModalCloseContent = styled.View`
+  flex: 1;
+  align-items: center;
+  justify-content: space-around;
+  padding-top: 24px;
+`

@@ -5,7 +5,6 @@ export async function changeStatusOrder(req: Request, res: Response) {
   try {
     const {orderId} = req.params
     const {status} = req.body
-    console.log(status)
 
     await Order.findByIdAndUpdate(orderId, {status})
 
