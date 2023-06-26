@@ -7,6 +7,10 @@ import {RefreshControl} from 'react-native'
 import {Loading} from '../../components/loading'
 import {api} from '../../api'
 
+type Params = {
+  id?: string
+}
+
 const Home = () => {
   const [refreshing, setRefreshing] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
@@ -39,7 +43,7 @@ const Home = () => {
     }, [dependenceArray]),
   )
 
-  const navigation = useNavigation<NavigationType>()
+  const navigation = useNavigation<NavigationType<Params>>()
 
   return (
     <S.HomeContainer>

@@ -37,7 +37,7 @@ export const CloseOrderText = styled.Text`
 `
 
 export const ProductsContainer = styled.ScrollView`
-  background: ${colors.grey};
+  background: ${colors.gray};
 `
 
 export const Product = styled(TouchableOpacity)`
@@ -101,6 +101,7 @@ export const Subtotal = styled.Text`
 export const SubtotalPrice = styled.Text`
   color: ${colors.green};
   font-size: 36px;
+  font-weight: bold;
 `
 
 export const AddButton = styled(TouchableOpacity)`
@@ -117,7 +118,7 @@ export const AddText = styled.Text`
 export const Button = styled.TouchableOpacity``
 
 export const ModalIcon = styled(AntDesign)`
-  color: #d72e2e;
+  color: ${colors.red};
 `
 
 export const Overlay = styled(TouchableOpacity)`
@@ -152,7 +153,7 @@ export const ModalOptions = styled.View`
 
 export const ModalProductName = styled.Text`
   font-size: ${useResponsive(24)};
-  color: #f2f2f2;
+  color: ${colors.white};
   text-align: center;
 `
 
@@ -181,7 +182,7 @@ export const ModalCloseBody = styled(TouchableOpacity)`
 
   padding: 20px;
 
-  background-color: #191919;
+  background: ${colors.background};
 `
 
 export const ModalCloseMessage = styled.Text`

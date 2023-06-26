@@ -221,7 +221,7 @@ export const Details = ({
             <S.AddButton
               style={{
                 backgroundColor: `${
-                  order?.status === 'OPEN' ? colors.red : colors.grey
+                  order?.status === 'OPEN' ? colors.red : colors.gray
                 }`,
               }}
               onPress={() => handleAddProduct()}>
