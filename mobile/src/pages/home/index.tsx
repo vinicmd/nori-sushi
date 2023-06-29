@@ -52,12 +52,12 @@ const Home = () => {
 
   async function handleAddTable() {
     try {
+      setIsLoading(true)
       setIsVisible(false)
       if (!tableName) {
         return
       }
 
-      setIsLoading(true)
       const newOrder = await api.post('/orders', {
         table: tableName,
       })

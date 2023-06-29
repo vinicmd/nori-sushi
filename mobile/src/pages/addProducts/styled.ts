@@ -1,10 +1,4 @@
-import {
-  Dimensions,
-  FlatList,
-  Image,
-  ScrollView,
-  TouchableOpacity,
-} from 'react-native'
+import {Dimensions, Image, ScrollView, TouchableOpacity} from 'react-native'
 import styled from 'styled-components/native'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 

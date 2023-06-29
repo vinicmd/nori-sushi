@@ -3,12 +3,11 @@ import * as S from './styled'
 interface ButtonProps {
   children: string
   onPress: () => void
-  style?: {}
 }
 
-const Button = ({ children, onPress, style }: ButtonProps) => {
+const Button = ({children, onPress}: ButtonProps) => {
   return (
-    <S.Button onPress={onPress} style={style}>
+    <S.Button onPress={onPress}>
       <S.ButtonText>{children}</S.ButtonText>
     </S.Button>
   )

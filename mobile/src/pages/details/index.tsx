@@ -129,8 +129,8 @@ export const Details = ({
 
   async function handleChangeStatusOrder() {
     try {
-      setIsChangingStatus(false)
       setIsLoading(true)
+      setIsChangingStatus(false)
       await api.patch(`/orders/${id}`, {
         status: `${order?.status === 'OPEN' ? 'CLOSED' : 'OPEN'}`,
       })
