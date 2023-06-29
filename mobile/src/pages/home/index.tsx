@@ -3,19 +3,26 @@ import {useFocusEffect, useNavigation} from '@react-navigation/native'
 import {OrderCard} from '../../components/OrderCard'
 import {NavigationType, Order, OrderProp} from '../../utils/types'
 import * as S from './styles'
-import {RefreshControl} from 'react-native'
+import {Modal, RefreshControl} from 'react-native'
 import {Loading} from '../../components/loading'
 import {api} from '../../api'
+import {RFValue} from 'react-native-responsive-fontsize'
+import Button from '../../components/Button'
 
 type Params = {
   id?: string
+  table?: string
 }
 
 const Home = () => {
   const [refreshing, setRefreshing] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
+  const [isVisible, setIsVisible] = useState(false)
   const [orders, setOrders] = useState<Array<Order>>()
   const [dependenceArray, setDependenceArray] = useState({})
+  const [tableName, setTableName] = useState('')
+
+  const navigation = useNavigation<NavigationType<Params>>()
 
   const onRefresh = useCallback(() => {
     setRefreshing(true)
@@ -43,7 +50,29 @@ const Home = () => {
     }, [dependenceArray]),
   )
 
-  const navigation = useNavigation<NavigationType<Params>>()
+  async function handleAddTable() {
+    try {
+      setIsVisible(false)
+      if (!tableName) {
+        return
+      }
+
+      setIsLoading(true)
+      const newOrder = await api.post('/orders', {
+        table: tableName,
+      })
+
+      navigation.navigate('AddProducts', {
+        table: tableName,
+        id: newOrder.data._id,
+      })
+    } catch (error: unknown) {
+      console.log(error)
+    } finally {
+      setTableName('')
+      setIsLoading(false)
+    }
+  }
 
   return (
     <S.HomeContainer>
@@ -75,6 +104,41 @@ const Home = () => {
           />
         </>
       )}
+      <S.Footer>
+        <S.AddButton onPress={() => setIsVisible(!isVisible)}>
+          <S.AddText>+ Adicionar</S.AddText>
+        </S.AddButton>
+      </S.Footer>
+      <Modal
+        animationType="fade"
+        transparent
+        visible={isVisible}
+        onRequestClose={() => {
+          setIsVisible(!isVisible)
+        }}>
+        <S.Overlay activeOpacity={1} onPressIn={() => setIsVisible(!isVisible)}>
+          <S.ModalBody activeOpacity={1} onPress={() => null}>
+            <S.ModalHeader>
+              <S.ModalTitle>Nome da mesa:</S.ModalTitle>
+              <S.ModalCloseButton onPress={() => setIsVisible(!isVisible)}>
+                <S.ModalIcon name="closecircleo" size={RFValue(26)} />
+              </S.ModalCloseButton>
+            </S.ModalHeader>
+            <S.ModalContent>
+              <S.ModalInput
+                autoComplete="off"
+                autoCorrect={false}
+                autoFocus={true}
+                onChangeText={setTableName}
+                value={tableName}
+              />
+            </S.ModalContent>
+            <Button onPress={() => handleAddTable()}>
+              {tableName ? 'Adicionar' : 'Cancelar'}
+            </Button>
+          </S.ModalBody>
+        </S.Overlay>
+      </Modal>
     </S.HomeContainer>
   )
 }

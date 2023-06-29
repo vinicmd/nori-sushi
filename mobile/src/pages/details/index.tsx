@@ -93,20 +93,16 @@ export const Details = ({
     setQuantity(selectedProduct.quantity)
   }
 
-  const increaseValue = () => {
-    setQuantity(quantity + 1)
-  }
-
-  const decreaseValue = () => {
-    if (quantity === 0) return
-    setQuantity(quantity - 1)
+  function handleChangeQuantity(value: number) {
+    if (value === -1 && quantity === 0) return
+    setQuantity(quantity + value)
   }
 
   async function handleQuantity() {
     try {
       setIsLoading(true)
       setIsVisible(!isVisible)
-      const newProducts: Array<NewProduct> = []
+      const newProducts: NewProduct[] = []
       order &&
         order.products.forEach(product => {
           product._id !== productState.selectedProduct._id &&
@@ -133,8 +129,8 @@ export const Details = ({
 
   async function handleChangeStatusOrder() {
     try {
-      setIsLoading(true)
       setIsChangingStatus(false)
+      setIsLoading(true)
       await api.patch(`/orders/${id}`, {
         status: `${order?.status === 'OPEN' ? 'CLOSED' : 'OPEN'}`,
       })
@@ -250,11 +246,11 @@ export const Details = ({
               </S.ModalCloseButton>
             </S.ModalHeader>
             <S.ModalContent>
-              <S.ModalButton onPress={() => decreaseValue()}>
+              <S.ModalButton onPress={() => handleChangeQuantity(-1)}>
                 <S.ModalIcon name="minuscircleo" size={RFValue(45)} />
               </S.ModalButton>
               <S.Quantity>{quantity}</S.Quantity>
-              <S.ModalButton onPress={() => increaseValue()}>
+              <S.ModalButton onPress={() => handleChangeQuantity(1)}>
                 <S.ModalIcon name="pluscircleo" size={RFValue(45)} />
               </S.ModalButton>
             </S.ModalContent>
