@@ -7,6 +7,10 @@ export const Order = model(
       type: String,
       required: true,
     },
+    contributor: {
+      type: Number,
+      required: false,
+    },
     status: {
       type: String,
       enum: ['OPEN', 'CLOSED', 'DELETED'],

@@ -17,8 +17,8 @@ export const DetailHeader = styled.View`
   height: 60px;
 `
 export const TableName = styled.Text`
-  font-size: ${useResponsive(32)};
-  max-width: 50%;
+  font-size: ${useResponsive(24)};
+  max-width: 65%;
   color: ${colors.white};
 `
 

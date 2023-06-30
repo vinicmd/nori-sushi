@@ -5,6 +5,7 @@ export type Order = {
   createdAt: string
   products: Array<Products>
   status: 'OPEN' | 'CLOSED' | 'DELETED'
+  contributor?: number
 }
 
 export type OrderProp = {

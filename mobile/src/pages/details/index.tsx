@@ -86,7 +86,8 @@ export const Details = ({
   }, [])
 
   function handlePress(selectedProduct: Products) {
-    setIsVisible(!isVisible)
+    if (order?.status !== 'OPEN') return
+    setIsVisible(true)
     setProductState({
       selectedProduct,
     })
@@ -112,10 +113,11 @@ export const Details = ({
             })
         })
 
-      newProducts.push({
-        product: productState.selectedProduct.product._id,
-        quantity,
-      })
+      quantity &&
+        newProducts.push({
+          product: productState.selectedProduct.product._id,
+          quantity,
+        })
       const result = await api.put(`/orders/${id}`, {
         products: newProducts,
       })
@@ -169,7 +171,7 @@ export const Details = ({
         <>
           <S.DetailHeader>
             <BackButton />
-            <S.TableName>{`${
+            <S.TableName numberOfLines={1}>{`${
               order && order.table ? order.table : ''
             }`}</S.TableName>
             <S.CloseOrderContainer
@@ -193,7 +195,9 @@ export const Details = ({
                     key={product._id}
                     onPress={() => handlePress(product)}>
                     <S.ProductDescription>
-                      <S.ProductName>{product.product.name}</S.ProductName>
+                      <S.ProductName numberOfLines={1}>
+                        {product.product.name}
+                      </S.ProductName>
                       <S.ProductQuantity>{`x ${product.quantity}`}</S.ProductQuantity>
                     </S.ProductDescription>
                     <S.ProductPrice>

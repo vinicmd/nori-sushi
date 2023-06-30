@@ -228,7 +228,7 @@ export const AddProducts = ({route}: Route) => {
       )}
       <S.Footer>
         <S.AddButton onPress={() => handleAddProducts()}>
-          <S.AddText>+ Adicionar</S.AddText>
+          <S.AddText>Confirmar</S.AddText>
         </S.AddButton>
       </S.Footer>
     </S.AddProductContainer>

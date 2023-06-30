@@ -8,6 +8,7 @@ import {Loading} from '../../components/loading'
 import {api} from '../../api'
 import {RFValue} from 'react-native-responsive-fontsize'
 import Button from '../../components/Button'
+import {isNetworkError} from '../../utils/isNetworkError'
 
 type Params = {
   id?: string
@@ -35,12 +36,13 @@ const Home = () => {
 
   useFocusEffect(
     useCallback(() => {
+      setIsLoading(true)
       const fetchData = async () => {
         try {
           const result = await api('/orders')
           setOrders(result.data)
         } catch (error: unknown) {
-          console.log(error)
+          isNetworkError(error)
         } finally {
           setIsLoading(false)
         }
@@ -67,7 +69,7 @@ const Home = () => {
         id: newOrder.data._id,
       })
     } catch (error: unknown) {
-      console.log(error)
+      isNetworkError(error)
     } finally {
       setTableName('')
       setIsLoading(false)

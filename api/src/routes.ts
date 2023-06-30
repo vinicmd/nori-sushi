@@ -3,8 +3,12 @@ import {Router} from 'express'
 import {Orders} from './app/useCases/orders'
 import {Products} from './app/useCases/products'
 import {Categories} from './app/useCases/categories'
+import {alive} from './app/useCases/alive'
 
 export const router = Router()
+
+// it's alive!
+router.get('/', alive)
 
 // list categories
 router.get('/categories', Categories.listCategories)

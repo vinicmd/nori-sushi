@@ -74,6 +74,9 @@ export const ProductComponentContainer = styled.View`
   flex-direction: row;
   justify-content: space-between;
   padding: 10px 0;
+  border-bottom-color: ${colors.lightGray};
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
 `
 
 export const ProductImageView = styled(TouchableOpacity)`

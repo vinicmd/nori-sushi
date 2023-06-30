@@ -14,7 +14,7 @@ export const OrderCard = ({order, onPress}: Types) => {
       onPress={onPress}
       style={{borderBottomColor: `${colors.white}`, borderBottomWidth: 1}}>
       <S.Title>
-        <S.Table>{`${order.table}`}</S.Table>
+        <S.Table numberOfLines={1}>{`${order.table}`}</S.Table>
       </S.Title>
       <S.Footer>
         <S.DescriptionContainer>
