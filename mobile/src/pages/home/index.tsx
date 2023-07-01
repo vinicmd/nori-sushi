@@ -3,12 +3,13 @@ import {useFocusEffect, useNavigation} from '@react-navigation/native'
 import {OrderCard} from '../../components/OrderCard'
 import {NavigationType, Order, OrderProp} from '../../utils/types'
 import * as S from './styles'
-import {Modal, RefreshControl} from 'react-native'
+import {Modal, Pressable, RefreshControl} from 'react-native'
 import {Loading} from '../../components/loading'
 import {api} from '../../api'
 import {RFValue} from 'react-native-responsive-fontsize'
 import Button from '../../components/Button'
 import {isNetworkError} from '../../utils/isNetworkError'
+import ContextMenu from 'react-native-context-menu-view'
 
 type Params = {
   id?: string
@@ -83,7 +84,24 @@ const Home = () => {
       ) : (
         <>
           <S.Header>
-            <S.Logo source={require('../../assets/logo.png')} />
+            <ContextMenu
+              title={'Ações'}
+              previewBackgroundColor="transparent"
+              actions={[
+                {
+                  title: 'Listar todos os pedidos',
+                  systemIcon: 'paintbrush',
+                },
+                {
+                  title: 'Cadastrar produto',
+                },
+              ]}
+              onPress={event => {
+                const {index, name} = event.nativeEvent
+                console.log(index, name)
+              }}>
+              <S.Logo source={require('../../assets/logo.png')} />
+            </ContextMenu>
           </S.Header>
           <S.OrdersList
             refreshControl={

@@ -1,5 +1,5 @@
 import styled from 'styled-components/native'
-import {TouchableOpacity} from 'react-native'
+import {TextInput, TouchableOpacity} from 'react-native'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import {colors} from '../../utils/colors'
 import {useResponsive} from '../../utils/responsive'
@@ -78,7 +78,6 @@ export const ProductUnityPrice = styled.Text`
 `
 
 export const Footer = styled.View`
-  height: 120px;
   width: 100%;
   justify-content: space-between;
   align-items: center;
@@ -196,4 +195,16 @@ export const ModalCloseContent = styled.View`
   align-items: center;
   justify-content: space-around;
   padding-top: 24px;
+`
+
+export const Contributor = styled.Text`
+  color: ${colors.white};
+  font-size: ${useResponsive(20)};
+`
+export const ContributorInput = styled(TextInput)`
+  font-size: 28px;
+  width: 100%;
+  border-width: 1px;
+  border-color: ${colors.lightGray};
+  border-radius: 15px;
 `

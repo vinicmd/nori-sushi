@@ -1,4 +1,4 @@
-import {Modal, RefreshControl, ToastAndroid} from 'react-native'
+import {Modal, RefreshControl, TextInput, ToastAndroid} from 'react-native'
 import {useCallback, useState} from 'react'
 import {RFValue} from 'react-native-responsive-fontsize'
 import {useFocusEffect} from '@react-navigation/native'
@@ -56,6 +56,8 @@ export const Details = ({
   const [isVisible, setIsVisible] = useState(false)
   const [orderObject, setOrderObject] = useState({})
   const [refreshing, setRefreshing] = useState(false)
+  const [hasContributor, setHasContributor] = useState('')
+  const [isCloseOrder, setIsCloseOrder] = useState(false)
   const [isChangingStatus, setIsChangingStatus] = useState(false)
 
   const id = `${route.params.id}`
@@ -66,6 +68,7 @@ export const Details = ({
         try {
           const result = await api(`/orders/${id}`)
           setOrder(result.data[0])
+          setHasContributor(`${result.data[0].contributor}`)
         } catch (error: unknown) {
           console.log(error)
         } finally {
@@ -129,12 +132,22 @@ export const Details = ({
     }
   }
 
+  function needContributor() {
+    setIsChangingStatus(false)
+
+    if (hasContributor) return handleChangeStatusOrder()
+
+    setIsCloseOrder(true)
+  }
+
   async function handleChangeStatusOrder() {
     try {
       setIsLoading(true)
-      setIsChangingStatus(false)
+      setIsCloseOrder(false)
+
       await api.patch(`/orders/${id}`, {
         status: `${order?.status === 'OPEN' ? 'CLOSED' : 'OPEN'}`,
+        contributor: `${hasContributor}`,
       })
 
       setOrderObject({})
@@ -172,10 +185,9 @@ export const Details = ({
           <S.DetailHeader>
             <BackButton />
             <S.TableName numberOfLines={1}>{`${
-              order && order.table ? order.table : ''
+              order && order.table
             }`}</S.TableName>
-            <S.CloseOrderContainer
-              onPress={() => setIsChangingStatus(!isChangingStatus)}>
+            <S.CloseOrderContainer onPress={() => setIsChangingStatus(true)}>
               <S.CloseOrderText>{`${
                 order?.status === 'OPEN' ? 'Encerrar' : 'Reabrir'
               }`}</S.CloseOrderText>
@@ -211,7 +223,8 @@ export const Details = ({
                 )
               })}
           </S.ProductsContainer>
-          <S.Footer>
+          <S.Footer style={{height: hasContributor ? 150 : 120}}>
+            {hasContributor && <S.Contributor>{hasContributor}</S.Contributor>}
             <S.SubtotalContainer>
               <S.Subtotal>Subtotal: </S.Subtotal>
               <S.SubtotalPrice>{`${CalcAmount(
@@ -269,15 +282,14 @@ export const Details = ({
         transparent
         visible={isChangingStatus}
         onRequestClose={() => {
-          setIsChangingStatus(!isChangingStatus)
+          setIsChangingStatus(false)
         }}>
         <S.Overlay
           activeOpacity={1}
-          onPressIn={() => setIsChangingStatus(!isChangingStatus)}>
+          onPressIn={() => setIsChangingStatus(false)}>
           <S.ModalCloseBody activeOpacity={1} onPress={() => null}>
             <S.ModalHeader>
-              <S.ModalCloseButton
-                onPress={() => setIsChangingStatus(!isChangingStatus)}>
+              <S.ModalCloseButton onPress={() => setIsChangingStatus(false)}>
                 <S.ModalIcon name="closecircleo" size={RFValue(26)} />
               </S.ModalCloseButton>
             </S.ModalHeader>
@@ -287,11 +299,40 @@ export const Details = ({
                   order?.status === 'OPEN' ? 'ENCERRAR' : 'REABRIR'
                 } a ${order?.table}?`}
               </S.ModalCloseMessage>
-              <Button onPress={() => handleChangeStatusOrder()}>
+              <Button onPress={() => needContributor()}>
                 {`${order?.status === 'OPEN' ? 'Encerrar' : 'Reabrir'}`}
               </Button>
-              <Button onPress={() => setIsChangingStatus(!isChangingStatus)}>
+              <Button onPress={() => setIsChangingStatus(false)}>
                 Cancelar
+              </Button>
+            </S.ModalCloseContent>
+          </S.ModalCloseBody>
+        </S.Overlay>
+      </Modal>
+      <Modal
+        animationType="fade"
+        transparent
+        visible={isCloseOrder}
+        onRequestClose={() => {
+          setIsCloseOrder(false)
+        }}>
+        <S.Overlay activeOpacity={1}>
+          <S.ModalCloseBody activeOpacity={1}>
+            <S.ModalHeader>
+              <S.ModalCloseButton onPress={() => setIsCloseOrder(false)}>
+                <S.ModalIcon name="closecircleo" size={RFValue(26)} />
+              </S.ModalCloseButton>
+            </S.ModalHeader>
+            <S.ModalCloseContent>
+              <S.ModalCloseMessage>Digite o Contribuinte</S.ModalCloseMessage>
+              <S.ContributorInput
+                keyboardType="number-pad"
+                maxLength={9}
+                onChangeText={setHasContributor}
+                value={hasContributor}
+              />
+              <Button onPress={() => handleChangeStatusOrder()}>
+                Concluir
               </Button>
             </S.ModalCloseContent>
           </S.ModalCloseBody>

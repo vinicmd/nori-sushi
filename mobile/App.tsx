@@ -12,15 +12,10 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack'
 import {Home} from './src/pages/home'
 import {Details} from './src/pages/details'
 import {AddProducts} from './src/pages/addProducts'
-
-type RootStackParamList = {
-  Home: undefined
-  Details: {id: string}
-  AddProducts: {id: string}
-}
+import {NewProducts} from './src/pages/newProducts'
 
 const App = () => {
-  const Stack = createNativeStackNavigator<RootStackParamList>()
+  const Stack = createNativeStackNavigator()
 
   return (
     <NavigationContainer>
@@ -33,6 +28,7 @@ const App = () => {
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Details" component={Details} />
         <Stack.Screen name="AddProducts" component={AddProducts} />
+        <Stack.Screen name="NewProducts" component={NewProducts} />
       </Stack.Navigator>
     </NavigationContainer>
   )
