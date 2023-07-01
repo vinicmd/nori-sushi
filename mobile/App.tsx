@@ -14,8 +14,15 @@ import {Details} from './src/pages/details'
 import {AddProducts} from './src/pages/addProducts'
 import {NewProducts} from './src/pages/newProducts'
 
+type RootStackParamList = {
+  Home: undefined
+  Details: {id: string}
+  AddProducts: {id: string; table: string}
+  NewProducts: undefined
+}
+
 const App = () => {
-  const Stack = createNativeStackNavigator()
+  const Stack = createNativeStackNavigator<RootStackParamList>()
 
   return (
     <NavigationContainer>
