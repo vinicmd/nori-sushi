@@ -1,15 +1,17 @@
 import {useCallback, useState} from 'react'
 import {useFocusEffect, useNavigation} from '@react-navigation/native'
+import {Modal, RefreshControl} from 'react-native'
+import ContextMenu from 'react-native-context-menu-view'
+import {AxiosError} from 'axios'
+
 import {OrderCard} from '../../components/OrderCard'
 import {NavigationType, Order, OrderProp} from '../../utils/types'
 import * as S from './styles'
-import {Modal, Pressable, RefreshControl} from 'react-native'
 import {Loading} from '../../components/loading'
 import {api} from '../../api'
 import {RFValue} from 'react-native-responsive-fontsize'
 import Button from '../../components/Button'
 import {isNetworkError} from '../../utils/isNetworkError'
-import ContextMenu from 'react-native-context-menu-view'
 
 type Params = {
   id?: string
@@ -43,7 +45,7 @@ const Home = () => {
           const result = await api('/orders')
           setOrders(result.data)
         } catch (error: unknown) {
-          isNetworkError(error)
+          isNetworkError(error as Error | AxiosError)
         } finally {
           setIsLoading(false)
         }
@@ -70,7 +72,7 @@ const Home = () => {
         id: newOrder.data._id,
       })
     } catch (error: unknown) {
-      isNetworkError(error)
+      isNetworkError(error as Error | AxiosError)
     } finally {
       setTableName('')
       setIsLoading(false)

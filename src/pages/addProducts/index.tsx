@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {useFocusEffect, useNavigation} from '@react-navigation/native'
 import {useCallback, useState} from 'react'
+import {AxiosError} from 'axios'
 
 import * as S from './styled'
 import {api} from '../../api'
@@ -8,6 +9,7 @@ import {Loading} from '../../components/loading'
 import {BackButton} from '../../components/backButton'
 import {Product, Products} from '../../utils/types'
 import {formatCurrency} from '../../utils/formatCurrency'
+import {isNetworkError} from '../../utils/isNetworkError'
 
 type CategoriesTypes = {
   _id: string
@@ -87,7 +89,7 @@ export const AddProducts = ({route}: Route) => {
             setProducts(productArray)
           })
         } catch (error: unknown) {
-          console.log(error)
+          isNetworkError(error as Error | AxiosError)
         } finally {
           setIsLoading(false)
         }
@@ -143,7 +145,7 @@ export const AddProducts = ({route}: Route) => {
 
       navigation.goBack()
     } catch (error: unknown) {
-      console.log('Error: ', error)
+      isNetworkError(error as Error | AxiosError)
     } finally {
       setIsLoading(false)
     }

@@ -1,7 +1,8 @@
-import {Modal, RefreshControl, TextInput, ToastAndroid} from 'react-native'
+import {Modal, RefreshControl} from 'react-native'
 import {useCallback, useState} from 'react'
 import {RFValue} from 'react-native-responsive-fontsize'
 import {useFocusEffect} from '@react-navigation/native'
+import {AxiosError} from 'axios'
 
 import * as S from './styles'
 import Button from '../../components/Button'
@@ -12,6 +13,8 @@ import {colors} from '../../utils/colors'
 import {Loading} from '../../components/loading'
 import {CalcAmount} from '../../utils/calcAmount'
 import {Order, Products, UseNavigationProps} from '../../utils/types'
+import {useToast} from '../../utils/useToast'
+import {isNetworkError} from '../../utils/isNetworkError'
 
 type SelectedProduct = {
   selectedProduct: Products
@@ -70,7 +73,7 @@ export const Details = ({
           setOrder(result.data[0])
           setHasContributor(`${result.data[0].contributor}`)
         } catch (error: unknown) {
-          console.log(error)
+          isNetworkError(error as Error | AxiosError)
         } finally {
           setIsLoading(false)
         }
@@ -128,7 +131,7 @@ export const Details = ({
       setOrder(result.data[0])
       setOrderObject({})
     } catch (error: unknown) {
-      console.log('Error: ', error)
+      isNetworkError(error as Error | AxiosError)
     }
   }
 
@@ -152,22 +155,17 @@ export const Details = ({
 
       setOrderObject({})
     } catch (error: unknown) {
-      console.log('Error: ', error)
+      isNetworkError(error as Error | AxiosError)
     }
-  }
-
-  const showToast = () => {
-    ToastAndroid.show(
-      `Não é possível adicionar em um pedido ${
-        order?.status === 'CLOSED' ? 'FECHADO' : 'ENCERRADO.'
-      }`,
-      ToastAndroid.SHORT,
-    )
   }
 
   function handleAddProduct() {
     if (order?.status !== 'OPEN') {
-      return showToast()
+      return useToast(
+        `Não é possível adicionar em um pedido ${
+          order?.status === 'CLOSED' ? 'FECHADO' : 'ENCERRADO.'
+        }`,
+      )
     }
 
     navigation.navigate('AddProducts', {
