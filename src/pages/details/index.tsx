@@ -15,6 +15,7 @@ import {CalcAmount} from '../../utils/calcAmount'
 import {Order, Products, UseNavigationProps} from '../../utils/types'
 import {useToast} from '../../utils/useToast'
 import {isNetworkError} from '../../utils/isNetworkError'
+import {formatDate} from '../../utils/formatDate'
 
 type SelectedProduct = {
   selectedProduct: Products
@@ -182,9 +183,12 @@ export const Details = ({
         <>
           <S.DetailHeader>
             <BackButton />
-            <S.TableName numberOfLines={1}>{`${
-              order && order.table
-            }`}</S.TableName>
+            <S.TablaNameContainer>
+              <S.TableName numberOfLines={1}>{`${
+                order && order.table
+              }`}</S.TableName>
+              <S.Date>{formatDate(order?.createdAt || '')}</S.Date>
+            </S.TablaNameContainer>
             <S.CloseOrderContainer onPress={() => setIsChangingStatus(true)}>
               <S.CloseOrderText>{`${
                 order?.status === 'OPEN' ? 'Encerrar' : 'Reabrir'
