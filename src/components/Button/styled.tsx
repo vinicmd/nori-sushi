@@ -1,5 +1,6 @@
 import styled from 'styled-components/native'
 import {useResponsive} from '../../utils/responsive'
+import {colors} from '../../utils/colors'
 
 export const Button = styled.TouchableOpacity`
   width: ${useResponsive(280)};
@@ -16,4 +17,5 @@ export const Button = styled.TouchableOpacity`
 export const ButtonText = styled.Text`
   font-size: ${useResponsive(24)};
   font-weight: 600;
+  color: ${colors.white};
 `
