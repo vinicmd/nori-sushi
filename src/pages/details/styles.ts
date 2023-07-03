@@ -16,9 +16,19 @@ export const DetailHeader = styled.View`
   align-items: flex-start;
   height: 60px;
 `
-export const TableName = styled.Text`
-  font-size: ${useResponsive(24)};
+export const TablaNameContainer = styled.View`
   max-width: 65%;
+  justify-content: space-between;
+  align-items: center;
+`
+
+export const Date = styled.Text`
+  font-size: ${useResponsive(12)};
+  color: ${colors.white};
+`
+
+export const TableName = styled.Text`
+  font-size: ${useResponsive(20)};
   color: ${colors.white};
 `
 
@@ -62,18 +72,22 @@ export const ProductDescription = styled.View`
 
 export const ProductName = styled.Text`
   font-size: 28px;
+  color: ${colors.white};
 `
 
 export const ProductQuantity = styled.Text`
+  color: ${colors.white};
   font-size: 24px;
   margin-right: 10px;
 `
 
 export const ProductActualPrice = styled.Text`
+  color: ${colors.white};
   font-size: 28px;
 `
 
 export const ProductUnityPrice = styled.Text`
+  color: ${colors.white};
   font-size: 16px;
 `
 
@@ -112,6 +126,7 @@ export const AddButton = styled(TouchableOpacity)`
 `
 
 export const AddText = styled.Text`
+  color: ${colors.white};
   font-size: 26px;
 `
 export const Button = styled.TouchableOpacity``
@@ -169,6 +184,7 @@ export const ModalContent = styled.View`
 `
 
 export const Quantity = styled.Text`
+  color: ${colors.white};
   font-size: ${useResponsive(60)};
 `
 
@@ -207,4 +223,5 @@ export const ContributorInput = styled(TextInput)`
   border-width: 1px;
   border-color: ${colors.lightGray};
   border-radius: 15px;
+  color: ${colors.white};
 `

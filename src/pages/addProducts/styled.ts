@@ -100,9 +100,11 @@ export const ProductDescription = styled.View``
 export const ProductName = styled.Text`
   font-size: ${useResponsive(18)};
   font-weight: bold;
+  color: ${colors.white};
 `
 
 export const Description = styled.Text`
+  color: ${colors.white};
   font-size: 16px;
 `
 
@@ -160,5 +162,6 @@ export const AddButton = styled(TouchableOpacity)`
 `
 
 export const AddText = styled.Text`
+  color: ${colors.white};
   font-size: 26px;
 `

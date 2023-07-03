@@ -52,6 +52,7 @@ export const AddButton = styled(TouchableOpacity)`
 
 export const AddText = styled.Text`
   font-size: 26px;
+  color: ${colors.white};
 `
 
 export const Overlay = styled(TouchableOpacity)`
@@ -103,4 +104,5 @@ export const ModalInput = styled(TextInput)`
   border-width: 1px;
   border-color: ${colors.lightGray};
   border-radius: 15px;
+  color: ${colors.white};
 `

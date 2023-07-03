@@ -8,6 +8,21 @@ export const Card = styled(TouchableOpacity)`
   padding: 12px;
 `
 
+export const ClosedContainer = styled.View`
+  position: absolute;
+  background: ${colors.red};
+  border-radius: 10px;
+  padding: 5px;
+  width: 70px;
+  justify-content: center;
+  align-items: center;
+  right: 12px;
+  top: 12px;
+`
+export const ClosedText = styled.Text`
+  color: ${colors.white};
+`
+
 export const Title = styled.View``
 
 export const Footer = styled.View`
@@ -27,7 +42,14 @@ export const DescriptionContainer = styled.View`
 `
 
 export const Description = styled.Text`
+  color: ${colors.white};
   font-size: ${useResponsive(16)};
+`
+export const PriceContainer = styled.View``
+
+export const Date = styled.Text`
+  font-size: ${useResponsive(16)};
+  color: ${colors.white};
 `
 
 export const Price = styled.Text`
