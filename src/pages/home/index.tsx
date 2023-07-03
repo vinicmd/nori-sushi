@@ -25,6 +25,7 @@ const Home = () => {
   const [orders, setOrders] = useState<Array<Order>>()
   const [dependenceArray, setDependenceArray] = useState({})
   const [tableName, setTableName] = useState('')
+  const [allOrders, setAllOrders] = useState('/orders')
 
   const navigation = useNavigation<NavigationType<Params>>()
 
@@ -42,7 +43,8 @@ const Home = () => {
       setIsLoading(true)
       const fetchData = async () => {
         try {
-          const result = await api('/orders')
+          const result = await api(allOrders || '/orders')
+          console.log(allOrders)
           setOrders(result.data)
         } catch (error: unknown) {
           isNetworkError(error as Error | AxiosError)
@@ -88,19 +90,23 @@ const Home = () => {
           <S.Header>
             <ContextMenu
               title={'Ações'}
-              previewBackgroundColor="transparent"
               actions={[
                 {
                   title: 'Listar todos os pedidos',
-                  systemIcon: 'paintbrush',
                 },
                 {
                   title: 'Cadastrar produto',
                 },
               ]}
               onPress={event => {
-                const {index, name} = event.nativeEvent
-                console.log(index, name)
+                const {index} = event.nativeEvent
+                if (index === 0) {
+                  allOrders === '/orders'
+                    ? setAllOrders('/allorders')
+                    : setAllOrders('/orders')
+
+                  return setDependenceArray({})
+                }
               }}>
               <S.Logo source={require('../../assets/logo.png')} />
             </ContextMenu>
