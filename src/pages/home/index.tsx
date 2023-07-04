@@ -92,15 +92,22 @@ const Home = () => {
               title={'Ações'}
               actions={[
                 {
-                  title: 'Listar todos os pedidos',
+                  title: 'Cadastrar produto',
                 },
                 {
-                  title: 'Cadastrar produto',
+                  title: `${
+                    allOrders === '/orders'
+                      ? 'Listar todos os pedidos'
+                      : 'Listar pedidos abertos'
+                  }`,
                 },
               ]}
               onPress={event => {
                 const {index} = event.nativeEvent
-                if (index === 0) {
+                if (index === 0) return navigation.navigate('NewProducts')
+                if (index === 1) {
+                  setIsLoading(true)
+
                   allOrders === '/orders'
                     ? setAllOrders('/allorders')
                     : setAllOrders('/orders')

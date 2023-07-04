@@ -13,6 +13,7 @@ import {Home} from './src/pages/home'
 import {Details} from './src/pages/details'
 import {AddProducts} from './src/pages/addProducts'
 import {NewProducts} from './src/pages/newProducts'
+import {colors} from './src/utils/colors'
 
 type RootStackParamList = {
   Home: undefined
@@ -26,7 +27,7 @@ const App = () => {
 
   return (
     <NavigationContainer>
-      <StatusBar barStyle={'dark-content'} />
+      <StatusBar backgroundColor={`${colors.background}`} />
       <Stack.Navigator
         initialRouteName="Home"
         screenOptions={{

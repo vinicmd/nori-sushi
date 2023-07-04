@@ -17,7 +17,7 @@ export const DetailHeader = styled.View`
   height: 60px;
 `
 export const TablaNameContainer = styled.View`
-  max-width: 65%;
+  width: 65%;
   justify-content: space-between;
   align-items: center;
 `
@@ -28,8 +28,9 @@ export const Date = styled.Text`
 `
 
 export const TableName = styled.Text`
-  font-size: ${useResponsive(20)};
+  font-size: ${useResponsive(14)};
   color: ${colors.white};
+  font-weight: bold;
 `
 
 export const CloseOrderContainer = styled(TouchableOpacity)`
@@ -43,7 +44,7 @@ export const CloseOrderContainer = styled(TouchableOpacity)`
 
 export const CloseOrderText = styled.Text`
   color: ${colors.white};
-  font-size: ${useResponsive(16)};
+  font-size: 12px;
 `
 
 export const ProductsContainer = styled.ScrollView`
@@ -71,24 +72,24 @@ export const ProductDescription = styled.View`
 `
 
 export const ProductName = styled.Text`
-  font-size: 28px;
+  font-size: ${useResponsive(18)};
   color: ${colors.white};
 `
 
 export const ProductQuantity = styled.Text`
   color: ${colors.white};
-  font-size: 24px;
+  font-size: ${useResponsive(18)};
   margin-right: 10px;
 `
 
 export const ProductActualPrice = styled.Text`
   color: ${colors.white};
-  font-size: 28px;
+  font-size: ${useResponsive(20)};
 `
 
 export const ProductUnityPrice = styled.Text`
   color: ${colors.white};
-  font-size: 16px;
+  font-size: ${useResponsive(14)};
 `
 
 export const Footer = styled.View`
@@ -107,13 +108,13 @@ export const SubtotalContainer = styled.View`
 `
 
 export const Subtotal = styled.Text`
-  font-size: 32px;
+  font-size: ${useResponsive(18)};
   color: ${colors.white};
 `
 
 export const SubtotalPrice = styled.Text`
   color: ${colors.green};
-  font-size: 36px;
+  font-size: ${useResponsive(22)};
   font-weight: bold;
 `
 
@@ -127,7 +128,7 @@ export const AddButton = styled(TouchableOpacity)`
 
 export const AddText = styled.Text`
   color: ${colors.white};
-  font-size: 26px;
+  font-size: ${useResponsive(16)};
 `
 export const Button = styled.TouchableOpacity``
 
@@ -151,7 +152,7 @@ export const ModalBody = styled(TouchableOpacity)`
 
   padding: 20px;
 
-  background-color: #191919;
+  background-color: ${colors.background};
 `
 
 export const ModalHeader = styled.View`
@@ -166,7 +167,7 @@ export const ModalOptions = styled.View`
 `
 
 export const ModalProductName = styled.Text`
-  font-size: ${useResponsive(24)};
+  font-size: ${useResponsive(16)};
   color: ${colors.white};
   text-align: center;
 `
@@ -185,7 +186,7 @@ export const ModalContent = styled.View`
 
 export const Quantity = styled.Text`
   color: ${colors.white};
-  font-size: ${useResponsive(60)};
+  font-size: ${useResponsive(45)};
 `
 
 export const ModalButton = styled.TouchableOpacity``
@@ -201,7 +202,7 @@ export const ModalCloseBody = styled(TouchableOpacity)`
 `
 
 export const ModalCloseMessage = styled.Text`
-  font-size: ${useResponsive(24)};
+  font-size: ${useResponsive(16)};
   color: ${colors.white};
   text-align: center;
 `
@@ -215,7 +216,8 @@ export const ModalCloseContent = styled.View`
 
 export const Contributor = styled.Text`
   color: ${colors.white};
-  font-size: ${useResponsive(20)};
+  font-size: ${useResponsive(16)};
+  padding: 8px;
 `
 export const ContributorInput = styled(TextInput)`
   font-size: 28px;

@@ -50,7 +50,7 @@ export interface RouteProp {
 }
 
 export type NavigationType<T> = {
-  navigate: (screen: string, params: T | undefined) => void
+  navigate: (screen: string, params?: T | undefined) => void
 }
 
 export interface UseNavigationProps<N, R> {

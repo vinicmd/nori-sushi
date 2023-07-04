@@ -60,7 +60,7 @@ export const Details = ({
   const [isVisible, setIsVisible] = useState(false)
   const [orderObject, setOrderObject] = useState({})
   const [refreshing, setRefreshing] = useState(false)
-  const [hasContributor, setHasContributor] = useState('')
+  const [contributor, setContributor] = useState('')
   const [isCloseOrder, setIsCloseOrder] = useState(false)
   const [isChangingStatus, setIsChangingStatus] = useState(false)
 
@@ -72,7 +72,7 @@ export const Details = ({
         try {
           const result = await api(`/orders/${id}`)
           setOrder(result.data[0])
-          setHasContributor(`${result.data[0].contributor}`)
+          setContributor(result.data[0].contributor || '')
         } catch (error: unknown) {
           isNetworkError(error as Error | AxiosError)
         } finally {
@@ -139,7 +139,7 @@ export const Details = ({
   function needContributor() {
     setIsChangingStatus(false)
 
-    if (hasContributor) return handleChangeStatusOrder()
+    if (contributor) return handleChangeStatusOrder()
 
     setIsCloseOrder(true)
   }
@@ -151,7 +151,7 @@ export const Details = ({
 
       await api.patch(`/orders/${id}`, {
         status: `${order?.status === 'OPEN' ? 'CLOSED' : 'OPEN'}`,
-        contributor: `${hasContributor}`,
+        contributor: `${contributor}`,
       })
 
       setOrderObject({})
@@ -225,8 +225,10 @@ export const Details = ({
                 )
               })}
           </S.ProductsContainer>
-          <S.Footer style={{height: hasContributor ? 150 : 120}}>
-            {hasContributor && <S.Contributor>{hasContributor}</S.Contributor>}
+          <S.Footer style={{height: contributor ? 150 : 120}}>
+            {contributor && (
+              <S.Contributor>{`Contribuinte: ${contributor}`}</S.Contributor>
+            )}
             <S.SubtotalContainer>
               <S.Subtotal>Subtotal: </S.Subtotal>
               <S.SubtotalPrice>{`${CalcAmount(
@@ -266,11 +268,11 @@ export const Details = ({
             </S.ModalHeader>
             <S.ModalContent>
               <S.ModalButton onPress={() => handleChangeQuantity(-1)}>
-                <S.ModalIcon name="minuscircleo" size={RFValue(45)} />
+                <S.ModalIcon name="minuscircleo" size={RFValue(40)} />
               </S.ModalButton>
               <S.Quantity>{quantity}</S.Quantity>
               <S.ModalButton onPress={() => handleChangeQuantity(1)}>
-                <S.ModalIcon name="pluscircleo" size={RFValue(45)} />
+                <S.ModalIcon name="pluscircleo" size={RFValue(40)} />
               </S.ModalButton>
             </S.ModalContent>
             <Button onPress={() => handleQuantity()}>
@@ -330,8 +332,8 @@ export const Details = ({
               <S.ContributorInput
                 keyboardType="number-pad"
                 maxLength={9}
-                onChangeText={setHasContributor}
-                value={hasContributor}
+                onChangeText={setContributor}
+                value={contributor}
               />
               <Button onPress={() => handleChangeStatusOrder()}>
                 Concluir

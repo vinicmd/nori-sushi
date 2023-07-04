@@ -15,7 +15,6 @@ export const Button = styled.TouchableOpacity`
 `
 
 export const ButtonText = styled.Text`
-  font-size: ${useResponsive(24)};
-  font-weight: 600;
+  font-size: ${useResponsive(16)};
   color: ${colors.white};
 `
