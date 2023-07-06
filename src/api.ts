@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const url = 'http://192.168.123.46:3001/'
+const url = 'https://nori-sushi-api.onrender.com/'
 
 export const api = axios.create({
   baseURL: url,
