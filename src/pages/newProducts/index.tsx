@@ -1,5 +1,5 @@
-import {View} from 'react-native'
+import * as S from './styled'
 
 export const NewProducts = () => {
-  return <View></View>
+  return <S.NewProductContainer></S.NewProductContainer>
 }

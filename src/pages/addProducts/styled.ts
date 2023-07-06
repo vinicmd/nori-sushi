@@ -22,7 +22,7 @@ export const AddProductHeader = styled.View`
 `
 
 export const AddProductTitle = styled.Text`
-  font-size: ${useResponsive(32)};
+  font-size: ${useResponsive(24)};
   max-width: 50%;
   color: ${colors.white};
 `
@@ -80,7 +80,7 @@ export const ProductComponentContainer = styled.View`
 `
 
 export const ProductImageView = styled(TouchableOpacity)`
-  width: ${useResponsive(150)};
+  width: 140px;
   height: 100%;
 `
 
@@ -98,14 +98,14 @@ export const DescriptionContainer = styled.View`
 export const ProductDescription = styled.View``
 
 export const ProductName = styled.Text`
-  font-size: ${useResponsive(18)};
+  font-size: ${useResponsive(16)};
   font-weight: bold;
   color: ${colors.white};
 `
 
 export const Description = styled.Text`
   color: ${colors.white};
-  font-size: 16px;
+  font-size: ${useResponsive(14)};
 `
 
 export const Price = styled.Text`
@@ -141,7 +141,7 @@ export const Badge = styled.View`
 
 export const BadgeNumber = styled.Text`
   color: ${colors.white};
-  font-size: ${useResponsive(16)};
+  font-size: ${useResponsive(12)};
   font-weight: bold;
 `
 
@@ -163,5 +163,6 @@ export const AddButton = styled(TouchableOpacity)`
 
 export const AddText = styled.Text`
   color: ${colors.white};
-  font-size: 26px;
+  font-size: ${useResponsive(16)};
+  font-weight: bold;
 `

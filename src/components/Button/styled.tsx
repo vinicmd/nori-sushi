@@ -3,11 +3,10 @@ import {useResponsive} from '../../utils/responsive'
 import {colors} from '../../utils/colors'
 
 export const Button = styled.TouchableOpacity`
-  width: ${useResponsive(280)};
-  height: ${useResponsive(45)};
-
   align-items: center;
   justify-content: center;
+  padding: 10px;
+  width: 100%;
 
   border-radius: 24px;
 
@@ -16,5 +15,6 @@ export const Button = styled.TouchableOpacity`
 
 export const ButtonText = styled.Text`
   font-size: ${useResponsive(16)};
+  font-weight: bold;
   color: ${colors.white};
 `

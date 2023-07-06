@@ -128,6 +128,7 @@ export const AddButton = styled(TouchableOpacity)`
 
 export const AddText = styled.Text`
   color: ${colors.white};
+  font-weight: bold;
   font-size: ${useResponsive(16)};
 `
 export const Button = styled.TouchableOpacity``
