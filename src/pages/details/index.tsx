@@ -49,6 +49,7 @@ export const Details = ({
         price: 0,
         category: '',
         __v: 0,
+        description: '',
       },
       quantity: 0,
       _id: '',
