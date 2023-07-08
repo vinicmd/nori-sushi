@@ -54,4 +54,5 @@ export const Footer = styled.View`
   height: 60px;
   justify-content: center;
   align-items: center;
+  background: ${colors.background};
 `

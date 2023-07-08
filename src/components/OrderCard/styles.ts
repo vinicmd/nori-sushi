@@ -30,6 +30,7 @@ export const Footer = styled.View`
   flex-direction: row;
   align-items: flex-end;
   justify-content: space-between;
+  background: ${colors.background};
 `
 
 export const Table = styled.Text`

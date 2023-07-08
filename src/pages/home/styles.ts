@@ -39,6 +39,7 @@ export const Footer = styled.View`
   width: 100%;
   justify-content: center;
   align-items: center;
+  background: ${colors.background};
 `
 
 export const AddButton = styled(TouchableOpacity)`

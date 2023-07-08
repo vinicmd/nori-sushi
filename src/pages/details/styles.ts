@@ -96,6 +96,7 @@ export const Footer = styled.View`
   width: 100%;
   justify-content: space-between;
   align-items: center;
+  background: ${colors.background};
 `
 
 export const SubtotalContainer = styled.View`
