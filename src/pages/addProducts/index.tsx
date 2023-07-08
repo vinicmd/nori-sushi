@@ -184,9 +184,7 @@ export const AddProducts = ({route}: Route) => {
                   <S.ProductComponentContainer key={product._id}>
                     <S.ProductImageView>
                       <S.ProductImage
-                        source={{
-                          uri: 'https://res.cloudinary.com/dqupvdymv/image/upload/v1687795390/nori/807D7841-8A08-496D-B9D5-CE7E14FA30E4_cxbid2.png',
-                        }}
+                        source={require('../../assets/noImage.jpg')}
                       />
                       {product && product.quantity > 0 && (
                         <S.Badge>

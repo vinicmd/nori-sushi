@@ -86,6 +86,8 @@ export const ProductImageView = styled(TouchableOpacity)`
 
 export const ProductImage = styled(Image)`
   border-radius: 15px;
+  object-fit: cover;
+  width: 150px;
   height: 100%;
 `
 
