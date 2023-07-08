@@ -113,6 +113,7 @@ export const AddProducts = ({route}: Route) => {
         category: product.category,
         __v: product.__v,
         quantity: product.quantity + value,
+        description: product.description,
       })
     })
 
@@ -196,7 +197,9 @@ export const AddProducts = ({route}: Route) => {
                     <S.DescriptionContainer>
                       <S.ProductDescription>
                         <S.ProductName>{product.name}</S.ProductName>
-                        <S.Description>Camarão</S.Description>
+                        <S.Description>{`${
+                          product.description || ''
+                        }`}</S.Description>
                       </S.ProductDescription>
                       <S.Price>{formatCurrency(product.price)}</S.Price>
                       <S.IconsContainer>
