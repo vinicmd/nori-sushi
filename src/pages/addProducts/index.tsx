@@ -7,17 +7,9 @@ import * as S from './styled'
 import {api} from '../../api'
 import {Loading} from '../../components/loading'
 import {BackButton} from '../../components/backButton'
-import {Product, Products} from '../../utils/types'
+import {Category, Product, Products} from '../../utils/types'
 import {formatCurrency} from '../../utils/formatCurrency'
 import {isNetworkError} from '../../utils/isNetworkError'
-
-type CategoriesTypes = {
-  _id: string
-  name: string
-  icon: string
-  __v: number
-  order: number
-}
 
 type Route = {
   route: {
@@ -44,9 +36,9 @@ type ProductPost = {
 
 export const AddProducts = ({route}: Route) => {
   const [isLoading, setIsLoading] = useState(true)
-  const [categories, setCategories] = useState<CategoriesTypes[]>()
+  const [categories, setCategories] = useState<Category[]>()
   const [products, setProducts] = useState<AddProduct[]>()
-  const [selectedCategory, setSelectedCategory] = useState<CategoriesTypes>({
+  const [selectedCategory, setSelectedCategory] = useState<Category>({
     _id: '',
     name: '',
     icon: '',

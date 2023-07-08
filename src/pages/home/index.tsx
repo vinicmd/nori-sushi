@@ -44,7 +44,6 @@ const Home = () => {
       const fetchData = async () => {
         try {
           const result = await api(allOrders || '/orders')
-          console.log(allOrders)
           setOrders(result.data)
         } catch (error: unknown) {
           isNetworkError(error as Error | AxiosError)

@@ -57,3 +57,11 @@ export interface UseNavigationProps<N, R> {
   navigation: NavigationType<N>
   route: R
 }
+
+export type Category = {
+  _id: string
+  name: string
+  icon: string
+  __v: number
+  order: number
+}

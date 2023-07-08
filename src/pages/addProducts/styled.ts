@@ -64,7 +64,7 @@ export const CategoryName = styled.Text<TextProps>`
   opacity: ${({opacity}) => opacity || 1};
 `
 
-export const ProductsContainer = styled.View`
+export const ProductsContainer = styled.ScrollView`
   flex: 1;
 `
 
