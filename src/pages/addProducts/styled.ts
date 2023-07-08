@@ -41,13 +41,13 @@ export const CategoryButtonContainer = styled.View`
 
 export const CategoryButton = styled(TouchableOpacity)`
   padding: 5px;
-  background: ${colors.gray};
+  background: ${colors.background};
   width: 55px;
   height: 55px;
   border-radius: 35px;
   justify-content: center;
   align-items: center;
-  box-shadow: rgba(149, 157, 165, 1) 0px 8px 24px;
+  box-shadow: rgba(233, 244, 244, 1) 10px 10px 24px;
   elevation: 4;
   border: 1px solid ${colors.lightGray};
 `

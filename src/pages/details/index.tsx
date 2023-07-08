@@ -139,7 +139,8 @@ export const Details = ({
   function needContributor() {
     setIsChangingStatus(false)
 
-    if (contributor) return handleChangeStatusOrder()
+    if (contributor || order?.status === 'CLOSED')
+      return handleChangeStatusOrder()
 
     setIsCloseOrder(true)
   }

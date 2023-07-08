@@ -165,10 +165,10 @@ export const AddProducts = ({route}: Route) => {
                         onPress={() => handleCategory(category._id)}>
                         <S.CategoryButtonIcon
                           opacity={
-                            isVisible ? 1 : 0.2
+                            isVisible ? 1 : 0.4
                           }>{`${category.icon}`}</S.CategoryButtonIcon>
                       </S.CategoryButton>
-                      <S.CategoryName opacity={isVisible ? 1 : 0.2}>
+                      <S.CategoryName opacity={isVisible ? 1 : 0.4}>
                         {category.name}
                       </S.CategoryName>
                     </S.CategoryButtonContainer>
