@@ -26,16 +26,16 @@ export const NewProducts = () => {
       const fetchData = async () => {
         try {
           const result = await api('/categories')
-          const arrayCategories: Item[] = []
+          const items: Item[] = []
           result.data.forEach((category: Category, index: number) => {
-            arrayCategories.push({
+            items.push({
               label: `${category.icon} ${category.name}`,
               value: `${category._id}`,
               key: index,
             })
           })
 
-          setCategories(arrayCategories)
+          setCategories(items)
         } catch (error: unknown) {
           isNetworkError(error as Error | AxiosError)
         } finally {
@@ -62,6 +62,10 @@ export const NewProducts = () => {
     }
   }
 
+  const handlePriceChange = (rawValue: string) => {
+    setPrice(rawValue.toString())
+  }
+
   return (
     <S.NewProductContainer>
       {isLoading ? (
@@ -75,24 +79,32 @@ export const NewProducts = () => {
           <S.Form>
             <S.InputContainer>
               <S.Description>Nome</S.Description>
-              <S.Input value={name} onChangeText={setName} />
+              <S.Input
+                placeholder="Digite o nome do Produto"
+                value={name}
+                onChangeText={setName}
+              />
             </S.InputContainer>
             <S.InputContainer>
               <S.Description>Preço</S.Description>
-              <S.Input
+              <S.InputPrice
+                type={'money'}
+                options={{
+                  precision: 2,
+                  separator: ',',
+                  delimiter: '.',
+                  unit: '€',
+                  suffixUnit: '',
+                }}
+                placeholder="Digite o Preço"
+                keyboardType="numeric"
                 value={price}
-                keyboardType="number-pad"
-                onChangeText={setPrice}
+                onChangeText={handlePriceChange}
               />
             </S.InputContainer>
             <S.InputContainer>
               <S.Description>Categoria</S.Description>
               <S.Select
-                style={{
-                  inputAndroid: {
-                    fontSize: 20,
-                  },
-                }}
                 useNativeAndroidPickerStyle={false}
                 placeholder={{label: 'Selecione a Categoria:', value: null}}
                 items={categories as Item[]}

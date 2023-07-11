@@ -1,7 +1,8 @@
 import styled from 'styled-components/native'
 import {colors} from '../../utils/colors'
 import {useResponsive} from '../../utils/responsive'
-import RNPickerSelect from 'react-native-picker-select'
+import RNPickerSelect, {PickerSelectProps} from 'react-native-picker-select'
+import {TextInputMask} from 'react-native-masked-text'
 
 export const NewProductContainer = styled.SafeAreaView`
   flex: 1;
@@ -40,12 +41,22 @@ export const Input = styled.TextInput`
   font-size: ${useResponsive(16)};
 `
 
+export const InputPrice = styled(TextInputMask)`
+  margin: 12px 0;
+  border: 1px solid ${colors.white};
+  width: 100%;
+  padding: 5px 15px;
+  border-radius: 15px;
+  color: ${colors.white};
+  font-size: ${useResponsive(16)};
+`
+
 export const Form = styled.ScrollView`
   padding: 20px 0;
   height: 100%;
 `
 
-export const Select = styled(RNPickerSelect)`
+export const Select = styled(RNPickerSelect)<PickerSelectProps>`
   color: ${colors.white};
 `
 
