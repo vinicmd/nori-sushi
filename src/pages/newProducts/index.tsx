@@ -88,14 +88,6 @@ export const NewProducts = () => {
             <S.InputContainer>
               <S.Description>Preço</S.Description>
               <S.InputPrice
-                type={'money'}
-                options={{
-                  precision: 2,
-                  separator: ',',
-                  delimiter: '.',
-                  unit: '€',
-                  suffixUnit: '',
-                }}
                 placeholder="Digite o Preço"
                 keyboardType="numeric"
                 value={price}

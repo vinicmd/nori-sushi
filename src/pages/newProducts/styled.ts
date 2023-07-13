@@ -2,7 +2,6 @@ import styled from 'styled-components/native'
 import {colors} from '../../utils/colors'
 import {useResponsive} from '../../utils/responsive'
 import RNPickerSelect, {PickerSelectProps} from 'react-native-picker-select'
-import {TextInputMask} from 'react-native-masked-text'
 
 export const NewProductContainer = styled.SafeAreaView`
   flex: 1;
@@ -41,7 +40,7 @@ export const Input = styled.TextInput`
   font-size: ${useResponsive(16)};
 `
 
-export const InputPrice = styled(TextInputMask)`
+export const InputPrice = styled.TextInput`
   margin: 12px 0;
   border: 1px solid ${colors.white};
   width: 100%;
