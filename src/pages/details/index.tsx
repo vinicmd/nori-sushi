@@ -1,5 +1,5 @@
 import {Modal, RefreshControl} from 'react-native'
-import {useCallback, useState} from 'react'
+import {Fragment, useCallback, useState} from 'react'
 import {RFValue} from 'react-native-responsive-fontsize'
 import {useFocusEffect} from '@react-navigation/native'
 import {AxiosError} from 'axios'
@@ -41,10 +41,11 @@ export const Details = ({
   route,
   navigation,
 }: UseNavigationProps<Params, Route>) => {
+  const id = `${route.params.id}`
   const [productState, setProductState] = useState<SelectedProduct>({
     selectedProduct: {
       product: {
-        _id: '',
+        _id: id,
         name: '',
         price: 0,
         category: '',
@@ -64,8 +65,6 @@ export const Details = ({
   const [contributor, setContributor] = useState('')
   const [isCloseOrder, setIsCloseOrder] = useState(false)
   const [isChangingStatus, setIsChangingStatus] = useState(false)
-
-  const id = `${route.params.id}`
 
   useFocusEffect(
     useCallback(() => {
@@ -207,23 +206,24 @@ export const Details = ({
                   product.product.price * product.quantity,
                 )
                 return (
-                  <S.Product
-                    key={product._id}
-                    onPress={() => handlePress(product)}>
-                    <S.ProductDescription>
-                      <S.ProductName numberOfLines={1}>
-                        {product.product.name}
-                      </S.ProductName>
-                      <S.ProductQuantity>{`x ${product.quantity}`}</S.ProductQuantity>
-                    </S.ProductDescription>
-                    <S.ProductPrice>
-                      <S.ProductUnityPrice>
-                        {product.quantity > 1 &&
-                          `Unidade: ${formatCurrency(product.product.price)}`}
-                      </S.ProductUnityPrice>
-                      <S.ProductActualPrice>{`${actualPrice}`}</S.ProductActualPrice>
-                    </S.ProductPrice>
-                  </S.Product>
+                  <Fragment key={product._id}>
+                    <S.Product onPress={() => handlePress(product)}>
+                      <S.ProductDescription>
+                        <S.ProductName numberOfLines={1}>
+                          {product.product.name}
+                        </S.ProductName>
+                        <S.ProductQuantity>{`x ${product.quantity}`}</S.ProductQuantity>
+                      </S.ProductDescription>
+                      <S.ProductPrice>
+                        <S.ProductUnityPrice>
+                          {product.quantity > 1 &&
+                            `Unidade: ${formatCurrency(product.product.price)}`}
+                        </S.ProductUnityPrice>
+                        <S.ProductActualPrice>{`${actualPrice}`}</S.ProductActualPrice>
+                      </S.ProductPrice>
+                    </S.Product>
+                    <S.Delimiter />
+                  </Fragment>
                 )
               })}
           </S.ProductsContainer>

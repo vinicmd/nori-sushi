@@ -59,7 +59,7 @@ export const CategoryButtonIcon = styled.Text<TextProps>`
 
 export const CategoryName = styled.Text<TextProps>`
   margin-top: 10px;
-  font-size: 16px;
+  font-size: ${useResponsive(12)};
   color: ${colors.white};
   opacity: ${({opacity}) => opacity || 1};
 `

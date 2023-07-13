@@ -92,6 +92,13 @@ export const ProductUnityPrice = styled.Text`
   font-size: ${useResponsive(14)};
 `
 
+export const Delimiter = styled.View`
+  height: 1px;
+  width: 90%;
+  background: ${colors.lightGray};
+  align-self: center;
+`
+
 export const Footer = styled.View`
   width: 100%;
   justify-content: space-between;

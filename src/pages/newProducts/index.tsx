@@ -1,7 +1,7 @@
 import {useCallback, useState} from 'react'
 import {AxiosError} from 'axios'
 import {useFocusEffect, useNavigation} from '@react-navigation/native'
-import {Item} from 'react-native-picker-select'
+import RNPickerSelect, {Item} from 'react-native-picker-select'
 
 import * as S from './styled'
 import Button from '../../components/Button'
@@ -104,7 +104,7 @@ export const NewProducts = () => {
             </S.InputContainer>
             <S.InputContainer>
               <S.Description>Categoria</S.Description>
-              <S.Select
+              <RNPickerSelect
                 useNativeAndroidPickerStyle={false}
                 placeholder={{label: 'Selecione a Categoria:', value: null}}
                 items={categories as Item[]}
