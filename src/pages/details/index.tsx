@@ -1,8 +1,9 @@
-import {Modal, RefreshControl} from 'react-native'
+import {Modal, RefreshControl, useWindowDimensions} from 'react-native'
 import {Fragment, useCallback, useState} from 'react'
 import {RFValue} from 'react-native-responsive-fontsize'
 import {useFocusEffect} from '@react-navigation/native'
 import {AxiosError} from 'axios'
+import QRCode from 'react-native-qrcode-svg'
 
 import * as S from './styles'
 import Button from '../../components/Button'
@@ -41,11 +42,11 @@ export const Details = ({
   route,
   navigation,
 }: UseNavigationProps<Params, Route>) => {
-  const id = `${route.params.id}`
+  const paramsId = `${route.params.id}`
   const [productState, setProductState] = useState<SelectedProduct>({
     selectedProduct: {
       product: {
-        _id: id,
+        _id: paramsId,
         name: '',
         price: 0,
         category: '',
@@ -60,6 +61,7 @@ export const Details = ({
   const [order, setOrder] = useState<Order>()
   const [isLoading, setIsLoading] = useState(true)
   const [isVisible, setIsVisible] = useState(false)
+  const [qrModalVisible, setQrModalVisible] = useState(false)
   const [orderObject, setOrderObject] = useState({})
   const [refreshing, setRefreshing] = useState(false)
   const [contributor, setContributor] = useState('')
@@ -70,7 +72,7 @@ export const Details = ({
     useCallback(() => {
       const fetchData = async () => {
         try {
-          const result = await api(`/orders/${id}`)
+          const result = await api(`/orders/${paramsId}`)
           setOrder(result.data[0])
           setContributor(result.data[0].contributor || '')
         } catch (error: unknown) {
@@ -125,7 +127,7 @@ export const Details = ({
           product: productState.selectedProduct.product._id,
           quantity,
         })
-      const result = await api.put(`/orders/${id}`, {
+      const result = await api.put(`/orders/${paramsId}`, {
         products: newProducts,
       })
 
@@ -150,7 +152,7 @@ export const Details = ({
       setIsLoading(true)
       setIsCloseOrder(false)
 
-      await api.patch(`/orders/${id}`, {
+      await api.patch(`/orders/${paramsId}`, {
         status: `${order?.status === 'OPEN' ? 'CLOSED' : 'OPEN'}`,
         contributor: `${contributor}`,
       })
@@ -171,9 +173,19 @@ export const Details = ({
     }
 
     navigation.navigate('AddProducts', {
-      id,
+      id: paramsId,
       table: order.table,
     })
+  }
+
+  function qrSize() {
+    const {width} = useWindowDimensions()
+    return width - 50
+  }
+
+  function handleQrModal(productName: string) {
+    if (productName.toLowerCase().includes('rodizio'))
+      return setQrModalVisible(true)
   }
 
   return (
@@ -207,7 +219,9 @@ export const Details = ({
                 )
                 return (
                   <Fragment key={product._id}>
-                    <S.Product onPress={() => handlePress(product)}>
+                    <S.Product
+                      onLongPress={() => handleQrModal(product.product.name)}
+                      onPress={() => handlePress(product)}>
                       <S.ProductDescription>
                         <S.ProductName numberOfLines={1}>
                           {product.product.name}
@@ -342,6 +356,30 @@ export const Details = ({
               </Button>
             </S.ModalCloseContent>
           </S.ModalCloseBody>
+        </S.Overlay>
+      </Modal>
+      <Modal
+        animationType="fade"
+        transparent
+        visible={qrModalVisible}
+        onRequestClose={() => {
+          setQrModalVisible(false)
+        }}>
+        <S.Overlay onPress={() => setQrModalVisible(false)} activeOpacity={1}>
+          <S.ModalQrCloseBody activeOpacity={1}>
+            <S.ModalHeader>
+              <S.ModalCloseButton onPress={() => setQrModalVisible(false)}>
+                <S.ModalIcon name="closecircleo" size={RFValue(26)} />
+              </S.ModalCloseButton>
+            </S.ModalHeader>
+            <S.ModalCloseContent>
+              <QRCode
+                size={qrSize()}
+                value={`https://norisushi.pt/${paramsId}`}
+                key={paramsId}
+              />
+            </S.ModalCloseContent>
+          </S.ModalQrCloseBody>
         </S.Overlay>
       </Modal>
     </S.DetailsContainer>

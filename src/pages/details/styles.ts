@@ -236,3 +236,13 @@ export const ContributorInput = styled(TextInput)`
   border-radius: 15px;
   color: ${colors.white};
 `
+
+export const ModalQrCloseBody = styled(TouchableOpacity)`
+  border-radius: 20px;
+  width: 100%;
+  height: ${useResponsive(65, true)};
+
+  padding: 20px;
+
+  background: ${colors.background};
+`
