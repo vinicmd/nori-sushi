@@ -1,6 +1,7 @@
-import {Dimensions, Image, ScrollView, TouchableOpacity} from 'react-native'
+import {Dimensions, ScrollView, TouchableOpacity} from 'react-native'
 import styled from 'styled-components/native'
 import AntDesign from 'react-native-vector-icons/AntDesign'
+import FastImage from 'react-native-fast-image'
 
 import {colors} from '../../utils/colors'
 import {useResponsive} from '../../utils/responsive'
@@ -84,7 +85,7 @@ export const ProductImageView = styled(TouchableOpacity)`
   height: 100%;
 `
 
-export const ProductImage = styled(Image)`
+export const ProductImage = styled(FastImage)`
   border-radius: 15px;
   object-fit: cover;
   width: 150px;

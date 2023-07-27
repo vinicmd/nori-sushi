@@ -21,8 +21,11 @@ export type Product = {
   name: string
   price: number
   category: string
-  description: string | undefined
+  description?: string
   __v: number
+  isBuffet: boolean
+  type?: string
+  imagePath: string
 }
 
 export type Products = {

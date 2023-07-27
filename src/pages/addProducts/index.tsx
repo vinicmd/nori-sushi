@@ -10,6 +10,7 @@ import {BackButton} from '../../components/backButton'
 import {Category, Product, Products} from '../../utils/types'
 import {formatCurrency} from '../../utils/formatCurrency'
 import {isNetworkError} from '../../utils/isNetworkError'
+import FastImage from 'react-native-fast-image'
 
 type Route = {
   route: {
@@ -114,6 +115,8 @@ export const AddProducts = ({route}: Route) => {
         __v: product.__v,
         quantity: product.quantity + value,
         description: product.description,
+        imagePath: product.imagePath,
+        isBuffet: product.isBuffet,
       })
     })
 
@@ -184,7 +187,12 @@ export const AddProducts = ({route}: Route) => {
                   <S.ProductComponentContainer key={product._id}>
                     <S.ProductImageView>
                       <S.ProductImage
-                        source={require('../../assets/noImage.jpg')}
+                        source={{
+                          uri: product.imagePath,
+                          cache: 'immutable',
+                          priority: 'high',
+                        }}
+                        resizeMode={FastImage.resizeMode.cover}
                       />
                       {product && product.quantity > 0 && (
                         <S.Badge>
