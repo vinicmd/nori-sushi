@@ -1,7 +1,8 @@
 import {useCallback, useState} from 'react'
 import {AxiosError} from 'axios'
 import {useFocusEffect, useNavigation} from '@react-navigation/native'
-import RNPickerSelect, {Item} from 'react-native-picker-select'
+import {Item} from 'react-native-picker-select'
+import {RFValue} from 'react-native-responsive-fontsize'
 
 import * as S from './styled'
 import Button from '../../components/Button'
@@ -11,6 +12,8 @@ import {isNetworkError} from '../../utils/isNetworkError'
 import {Category} from '../../utils/types'
 import {Loading} from '../../components/loading'
 import {useToast} from '../../utils/useToast'
+import {colors} from '../../utils/colors'
+import {SelectPicker} from '../../components/selectPicker'
 
 export const NewProducts = () => {
   const [isLoading, setIsLoading] = useState(true)
@@ -80,6 +83,7 @@ export const NewProducts = () => {
             <S.InputContainer>
               <S.Description>Nome</S.Description>
               <S.Input
+                placeholderTextColor={colors.white}
                 placeholder="Digite o nome do Produto"
                 value={name}
                 onChangeText={setName}
@@ -88,6 +92,7 @@ export const NewProducts = () => {
             <S.InputContainer>
               <S.Description>Preço</S.Description>
               <S.InputPrice
+                placeholderTextColor={colors.white}
                 placeholder="Digite o Preço"
                 keyboardType="numeric"
                 value={price}
@@ -96,7 +101,20 @@ export const NewProducts = () => {
             </S.InputContainer>
             <S.InputContainer>
               <S.Description>Categoria</S.Description>
-              <RNPickerSelect
+              <SelectPicker
+                style={{
+                  inputAndroid: {
+                    marginTop: 12,
+                    borderWidth: 1,
+                    borderColor: `${colors.white}`,
+                    borderRadius: 15,
+                    height: RFValue(37),
+                    width: RFValue(320),
+                    paddingHorizontal: 15,
+                    color: `${colors.white}`,
+                    fontSize: 18,
+                  },
+                }}
                 useNativeAndroidPickerStyle={false}
                 placeholder={{label: 'Selecione a Categoria:', value: null}}
                 items={categories as Item[]}

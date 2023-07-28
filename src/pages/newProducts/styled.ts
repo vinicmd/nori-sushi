@@ -1,7 +1,7 @@
 import styled from 'styled-components/native'
+import RNPickerSelect, {PickerSelectProps} from 'react-native-picker-select'
 import {colors} from '../../utils/colors'
 import {useResponsive} from '../../utils/responsive'
-import RNPickerSelect, {PickerSelectProps} from 'react-native-picker-select'
 
 export const NewProductContainer = styled.SafeAreaView`
   flex: 1;
