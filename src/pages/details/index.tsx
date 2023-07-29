@@ -52,6 +52,8 @@ export const Details = ({
         category: '',
         __v: 0,
         description: '',
+        isBuffet: false,
+        imagePath: '',
       },
       quantity: 0,
       _id: '',
@@ -62,11 +64,13 @@ export const Details = ({
   const [isLoading, setIsLoading] = useState(true)
   const [isVisible, setIsVisible] = useState(false)
   const [qrModalVisible, setQrModalVisible] = useState(false)
+  const [tableNameModal, setTableNameModal] = useState(false)
   const [orderObject, setOrderObject] = useState({})
   const [refreshing, setRefreshing] = useState(false)
   const [contributor, setContributor] = useState('')
   const [isCloseOrder, setIsCloseOrder] = useState(false)
   const [isChangingStatus, setIsChangingStatus] = useState(false)
+  const [tableName, setTableName] = useState('')
 
   useFocusEffect(
     useCallback(() => {
@@ -75,6 +79,7 @@ export const Details = ({
           const result = await api(`/orders/${paramsId}`)
           setOrder(result.data[0])
           setContributor(result.data[0].contributor || '')
+          setTableName(result.data[0].table)
         } catch (error: unknown) {
           isNetworkError(error as Error | AxiosError)
         } finally {
@@ -188,6 +193,25 @@ export const Details = ({
       return setQrModalVisible(true)
   }
 
+  async function handleChangeTableName() {
+    if (!tableName) {
+      setTableName(order?.table || '')
+      return setTableNameModal(false)
+    }
+
+    try {
+      setTableNameModal(false)
+      setIsLoading(true)
+      await api.put(`/orders/${paramsId}`, {
+        table: tableName,
+      })
+    } catch (error: unknown) {
+      isNetworkError(error as Error | AxiosError)
+    } finally {
+      setOrderObject({})
+    }
+  }
+
   return (
     <S.DetailsContainer>
       {isLoading ? (
@@ -196,7 +220,7 @@ export const Details = ({
         <>
           <S.DetailHeader>
             <BackButton />
-            <S.TablaNameContainer>
+            <S.TablaNameContainer onLongPress={() => setTableNameModal(true)}>
               <S.TableName numberOfLines={1}>{`${
                 order && order.table
               }`}</S.TableName>
@@ -380,6 +404,33 @@ export const Details = ({
               />
             </S.ModalCloseContent>
           </S.ModalQrCloseBody>
+        </S.Overlay>
+      </Modal>
+      <Modal
+        animationType="fade"
+        transparent
+        visible={tableNameModal}
+        onRequestClose={() => {
+          setTableNameModal(false)
+        }}>
+        <S.Overlay activeOpacity={1}>
+          <S.ModalCloseBody activeOpacity={1}>
+            <S.ModalHeader>
+              <S.ModalCloseButton onPress={() => setTableNameModal(false)}>
+                <S.ModalIcon name="closecircleo" size={RFValue(26)} />
+              </S.ModalCloseButton>
+            </S.ModalHeader>
+            <S.ModalCloseContent>
+              <S.ModalCloseMessage>Digite o nome da mesa:</S.ModalCloseMessage>
+              <S.ContributorInput
+                onChangeText={setTableName}
+                value={tableName}
+              />
+              <Button onPress={() => handleChangeTableName()}>
+                {tableName ? 'Alterar' : 'Cancelar'}
+              </Button>
+            </S.ModalCloseContent>
+          </S.ModalCloseBody>
         </S.Overlay>
       </Modal>
     </S.DetailsContainer>

@@ -16,7 +16,7 @@ export const DetailHeader = styled.View`
   align-items: flex-start;
   height: 60px;
 `
-export const TablaNameContainer = styled.View`
+export const TablaNameContainer = styled(TouchableOpacity)`
   width: 65%;
   justify-content: space-between;
   align-items: center;
