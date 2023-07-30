@@ -100,6 +100,9 @@ const Home = () => {
                       : 'Listar pedidos abertos'
                   }`,
                 },
+                {
+                  title: 'Listar produtos',
+                },
               ]}
               onPress={event => {
                 const {index} = event.nativeEvent
@@ -113,6 +116,7 @@ const Home = () => {
 
                   return setDependenceArray({})
                 }
+                if (index === 2) return navigation.navigate('ListProducts')
               }}>
               <S.Logo source={require('../../assets/logo.png')} />
             </ContextMenu>

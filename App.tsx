@@ -14,12 +14,14 @@ import {Details} from './src/pages/details'
 import {AddProducts} from './src/pages/addProducts'
 import {NewProducts} from './src/pages/newProducts'
 import {colors} from './src/utils/colors'
+import {ListProducts} from './src/pages/listProducts'
 
 type RootStackParamList = {
   Home: undefined
   Details: {id: string}
   AddProducts: {id: string; table: string}
   NewProducts: undefined
+  ListProducts: undefined
 }
 
 const App = () => {
@@ -37,6 +39,7 @@ const App = () => {
         <Stack.Screen name="Details" component={Details} />
         <Stack.Screen name="AddProducts" component={AddProducts} />
         <Stack.Screen name="NewProducts" component={NewProducts} />
+        <Stack.Screen name="ListProducts" component={ListProducts} />
       </Stack.Navigator>
     </NavigationContainer>
   )
