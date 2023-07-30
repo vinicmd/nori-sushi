@@ -1,6 +1,6 @@
 import {useCallback, useState} from 'react'
 import {useFocusEffect, useNavigation} from '@react-navigation/native'
-import {Modal, RefreshControl} from 'react-native'
+import {FlatList, Modal, RefreshControl} from 'react-native'
 import ContextMenu from 'react-native-context-menu-view'
 import {AxiosError} from 'axios'
 
@@ -117,7 +117,8 @@ const Home = () => {
               <S.Logo source={require('../../assets/logo.png')} />
             </ContextMenu>
           </S.Header>
-          <S.OrdersList
+          <FlatList
+            style={{flex: 1}}
             refreshControl={
               <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
             }
