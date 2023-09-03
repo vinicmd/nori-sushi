@@ -399,7 +399,7 @@ export const Details = ({
             <S.ModalCloseContent>
               <QRCode
                 size={qrSize()}
-                value={`https://norisushi.pt/${paramsId}`}
+                value={'https://norisushifatima.ola.click/'}
                 key={paramsId}
               />
             </S.ModalCloseContent>
