@@ -1,6 +1,7 @@
 import {Dimensions, ScrollView, Text, TouchableOpacity} from 'react-native'
 import styled from 'styled-components/native'
 import AntDesign from 'react-native-vector-icons/AntDesign'
+import Feather from 'react-native-vector-icons/Feather'
 import FastImage from 'react-native-fast-image'
 
 import {colors} from '../../utils/colors'
@@ -110,11 +111,23 @@ export const Description = styled.Text`
   color: ${colors.white};
   font-size: ${useResponsive(14)};
 `
+export const ActionContainer = styled.View`
+  flex-direction: row;
+  justify-content: space-around;
+`
 
 export const Price = styled.Text`
   font-size: ${useResponsive(20)};
   color: ${colors.green};
 `
+
+export const Button = styled.TouchableOpacity``
+
+export const IconAction = styled(Feather)`
+  font-size: 32px;
+  color: ${colors.red};
+`
+
 export const IconsContainer = styled.View`
   flex-direction: row;
   gap: 16px;

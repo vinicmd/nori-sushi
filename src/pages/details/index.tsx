@@ -17,6 +17,7 @@ import {Order, Products, UseNavigationProps} from '../../utils/types'
 import {useToast} from '../../utils/useToast'
 import {isNetworkError} from '../../utils/isNetworkError'
 import {formatDate} from '../../utils/formatDate'
+import ContextMenu from 'react-native-context-menu-view'
 
 type SelectedProduct = {
   selectedProduct: Products
@@ -188,9 +189,8 @@ export const Details = ({
     return width - 50
   }
 
-  function handleQrModal(productName: string) {
-    if (productName.toLowerCase().includes('rodizio'))
-      return setQrModalVisible(true)
+  function handleQrModal() {
+    return setQrModalVisible(true)
   }
 
   async function handleChangeTableName() {
@@ -220,11 +220,27 @@ export const Details = ({
         <>
           <S.DetailHeader>
             <BackButton />
-            <S.TablaNameContainer onLongPress={() => setTableNameModal(true)}>
-              <S.TableName numberOfLines={1}>{`${
-                order && order.table
-              }`}</S.TableName>
-              <S.Date>{formatDate(order?.createdAt || '')}</S.Date>
+            <S.TablaNameContainer>
+              <ContextMenu
+                title={'Ações'}
+                actions={[
+                  {
+                    title: 'Mudar Nome',
+                  },
+                  {
+                    title: 'Enviar Lista',
+                  },
+                ]}
+                onPress={event => {
+                  const {index} = event.nativeEvent
+                  if (index === 0) return setTableNameModal(true)
+                  if (index === 1) return 0
+                }}>
+                <S.TableName numberOfLines={1}>{`${
+                  order && order.table
+                }`}</S.TableName>
+                <S.Date>{formatDate(order?.createdAt || '')}</S.Date>
+              </ContextMenu>
             </S.TablaNameContainer>
             <S.CloseOrderContainer onPress={() => setIsChangingStatus(true)}>
               <S.CloseOrderText>{`${
@@ -244,7 +260,7 @@ export const Details = ({
                 return (
                   <Fragment key={product._id}>
                     <S.Product
-                      onLongPress={() => handleQrModal(product.product.name)}
+                      onLongPress={() => handleQrModal()}
                       onPress={() => handlePress(product)}>
                       <S.ProductDescription>
                         <S.ProductName numberOfLines={1}>

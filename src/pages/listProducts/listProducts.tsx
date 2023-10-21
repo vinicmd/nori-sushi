@@ -96,7 +96,7 @@ export const ListProducts = () => {
                       <S.ProductImage
                         source={{
                           uri: product.imagePath,
-                          cache: 'immutable',
+                          cache: 'web',
                           priority: 'high',
                         }}
                         resizeMode={FastImage.resizeMode.cover}
@@ -109,7 +109,15 @@ export const ListProducts = () => {
                           product.description || ''
                         }`}</S.Description>
                       </S.ProductDescription>
-                      <S.Price>{formatCurrency(product.price)}</S.Price>
+                      <S.ActionContainer>
+                        <S.Price>{formatCurrency(product.price)}</S.Price>
+                        <S.Button>
+                          <S.IconAction name="trash-2" />
+                        </S.Button>
+                        <S.Button>
+                          <S.IconAction name="edit" />
+                        </S.Button>
+                      </S.ActionContainer>
                     </S.DescriptionContainer>
                   </S.ProductComponentContainer>
                 )

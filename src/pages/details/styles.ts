@@ -244,5 +244,5 @@ export const ModalQrCloseBody = styled(TouchableOpacity)`
 
   padding: 20px;
 
-  background: ${colors.background};
+  background: ${colors.white};
 `
