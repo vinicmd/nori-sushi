@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import {useFocusEffect} from '@react-navigation/native'
+import {useFocusEffect, useNavigation} from '@react-navigation/native'
 import {useCallback, useState} from 'react'
 import {AxiosError} from 'axios'
 
@@ -7,10 +7,14 @@ import * as S from './styled'
 import {api} from '../../api'
 import {Loading} from '../../components/loading'
 import {BackButton} from '../../components/backButton'
-import {Category, Product} from '../../utils/types'
+import {Category, NavigationType, Product} from '../../utils/types'
 import {formatCurrency} from '../../utils/formatCurrency'
 import {isNetworkError} from '../../utils/isNetworkError'
 import FastImage from 'react-native-fast-image'
+
+type Params = {
+  id: string
+}
 
 export const ListProducts = () => {
   const [isLoading, setIsLoading] = useState(true)
@@ -23,6 +27,8 @@ export const ListProducts = () => {
     __v: 0,
     order: 0,
   })
+
+  const navigation = useNavigation<NavigationType<Params>>()
 
   useFocusEffect(
     useCallback(() => {
@@ -52,6 +58,12 @@ export const ListProducts = () => {
     const category =
       categories! && categories.find(value => value._id === idCategory)!
     setSelectedCategory(category)
+  }
+
+  function handleEdit(ParamId: string) {
+    return navigation.navigate('NewProducts', {
+      id: ParamId,
+    })
   }
 
   return (
@@ -114,7 +126,7 @@ export const ListProducts = () => {
                         <S.Button>
                           <S.IconAction name="trash-2" />
                         </S.Button>
-                        <S.Button>
+                        <S.Button onPress={() => handleEdit(product._id)}>
                           <S.IconAction name="edit" />
                         </S.Button>
                       </S.ActionContainer>

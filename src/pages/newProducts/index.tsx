@@ -15,7 +15,18 @@ import {useToast} from '../../utils/useToast'
 import {colors} from '../../utils/colors'
 import {SelectPicker} from '../../components/selectPicker'
 
-export const NewProducts = () => {
+type Params = {
+  route: {
+    key: string
+    name: string
+    params: {
+      id?: string
+    }
+    path: undefined
+  }
+}
+
+export const NewProducts = (props: Params) => {
   const [isLoading, setIsLoading] = useState(true)
   const [categories, setCategories] = useState<Item[]>()
   const [name, setName] = useState('')
@@ -23,12 +34,21 @@ export const NewProducts = () => {
   const [category, setCategory] = useState('')
 
   const navigation = useNavigation()
+  const {id} = props.route.params
+  console.log(id)
 
   useFocusEffect(
     useCallback(() => {
       const fetchData = async () => {
         try {
           const result = await api('/categories')
+          //let product
+          if (id) {
+            const getProduct = await api(`/products/${id}`)
+            const products = getProduct.data[0]
+            setName(products.name)
+            setPrice(`${products.price}`)
+          }
           const items: Item[] = []
           result.data.forEach((category: Category, index: number) => {
             items.push({
@@ -56,8 +76,19 @@ export const NewProducts = () => {
       if (!name || !price || !category) {
         return useToast('Preencha todos os campos')
       }
+
+      if (id) {
+        await api.put(`/products/${id}`, {
+          name,
+          category,
+          price,
+        })
+
+        return navigation.goBack()
+      }
+
       await api.post('/products', {name, category, price})
-      navigation.goBack()
+      return navigation.goBack()
     } catch (error: unknown) {
       isNetworkError(error as Error | AxiosError)
     } finally {
@@ -126,7 +157,7 @@ export const NewProducts = () => {
               onPress={() => {
                 handleSubmit()
               }}>
-              Cadastrar Produto
+              {`${!id ? 'Cadastrar Produto' : 'Editar Produto'}`}
             </Button>
           </S.Footer>
         </>
